@@ -1,0 +1,23 @@
+.hero-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;          /* optional, keeps text centered */
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Only style the video inside the hero */
+.hero-container video {
+  position: absolute;          /* or fixed if you want it to stay on scroll */
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
+}
