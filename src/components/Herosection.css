@@ -1,23 +1,115 @@
+/* Container + background video */
+
 .hero-container {
   position: relative;
   height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;          /* optional, keeps text centered */
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f9fafb;
 }
 
-/* Only style the video inside the hero */
-.hero-container video {
-  position: absolute;          /* or fixed if you want it to stay on scroll */
+.hero-video {
+  position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   transform: translate(-50%, -50%);
   object-fit: cover;
+  z-index: -2;
+}
+
+/* Dark overlay to make text readable */
+.hero-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.35),
+      transparent 55%
+    ),
+    rgba(15, 23, 42, 0.7);
   z-index: -1;
+}
+
+/* Inner content */
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  max-width: 640px;
+  padding: 0 1.5rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Base button style */
+.btn {
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Primary "Get Started" button */
+.btn-primary {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.45);
+}
+
+/* Outline "Watch Trailer" button */
+.btn-outline {
+  background: rgba(15, 23, 42, 0.55);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+}
+
+.btn-outline:hover {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+/* Tiny play icon */
+.btn-icon {
+  font-size: 0.9rem;
 }
