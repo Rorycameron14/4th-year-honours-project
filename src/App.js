@@ -1,8 +1,12 @@
 import React from 'react';
-import Navbar from './components/navbar';
-import Home from './components/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+import Navbar from './components/navbar';
+
+import Home from './components/pages/Home';
+import About from './components/pages/About';
+import Lesson from './components/pages/Lesson';
+import Enquire from './components/pages/Enquire';
+import Quiz from './components/pages/Quiz';
 
 function App() {
   return (
@@ -10,6 +14,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/lesson' element={<Lesson />} />
+        <Route path='/enquire' element={<Enquire />} />
+        <Route path='/quiz' element={<Quiz />} /> 
       </Routes>
     </Router>
   );

@@ -32,7 +32,7 @@ function Navbar() {
             FOCUSED
             <i className='fab fa-typo3' />
             <img
-              src="/images/logo.png"       // public/images/logo.png
+              src="/images/logo.png"
               alt="Focused logo"
               className="navbar-logo-icon"
               style={{
@@ -54,18 +54,30 @@ function Navbar() {
                 Home
               </Link>
             </li>
+
             <li className='nav-item'>
               <Link
-                to='/Getstarted'
+                to='/lesson'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Get Started
+                Lesson
               </Link>
             </li>
+
             <li className='nav-item'>
               <Link
-                to='/About'
+                to='/quiz'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                Quiz
+              </Link>
+            </li>
+
+            <li className='nav-item'>
+              <Link
+                to='/about'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
@@ -75,7 +87,7 @@ function Navbar() {
 
             <li>
               <Link
-                to='/Enquire'
+                to='/enquire'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
@@ -83,6 +95,7 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+
           {button && <Button buttonStyle='btn--outline'>Enquire</Button>}
         </div>
       </nav>
@@ -91,3 +104,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

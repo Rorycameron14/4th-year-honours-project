@@ -19,7 +19,7 @@ function Cards() {
               src='images/img-2.jpg'
               text='Expand your knowledge with our learning resources'
               label='Learn'
-              path='/services'
+              path='/Lesson'
             />
           </ul>
           <ul className='cards__items'>
@@ -27,7 +27,7 @@ function Cards() {
               src='images/img-3.jpg'
               text='Send us an enquiry and we will get back to you with the best options'
               label='Enquire'
-              path='/services'
+              path='/Enquire'
             />
             <CardItem
               src='images/img-4.jpg'
