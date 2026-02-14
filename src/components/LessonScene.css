@@ -42,31 +42,31 @@
   opacity: 0.9;
 }
 
-/* Middle panel – panorama + hotspots */
 .panorama-wrapper {
   position: relative;
   width: 100%;
-  height: calc(100% - 2.5rem); /* leave space under title */
+  height: 60vh;      /* you can tweak to 65–70vh if you want it taller */
+  margin-top: 0.5rem;
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(120deg, #1f2937, #020617); /* fallback if no image */
+  background: #020617;
 }
 
 .panorama-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;  /* fills nicely, slight crop at edges is fine */
   display: block;
 }
 
-/* Hotspot buttons */
+
 .hotspot {
   position: absolute;
   width: 20px;
   height: 20px;
   border-radius: 999px;
-  border: 2px solid #fbbf24;
-  background: rgba(251, 191, 36, 0.2);
+  border: 2px solid #1d4ed8;              /* dark-ish blue border */
+  background: rgba(37, 99, 235, 0.18);    /* soft blue glow inside */
   cursor: pointer;
   transform: translate(-50%, -50%);
   display: flex;
@@ -78,13 +78,13 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #fbbf24;
+  background: #60a5fa;                    /* lighter blue dot */
 }
 
-/* Active hotspot glow */
 .hotspot--active {
-  box-shadow: 0 0 16px rgba(251, 191, 36, 0.9);
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.9);  /* blue glow when active */
 }
+
 
 /* Right panel – info card */
 .info-card {

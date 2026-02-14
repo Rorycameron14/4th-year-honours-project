@@ -3,42 +3,43 @@ import './LessonScene.css';
 
 const egyptHotspots = [
   {
-    id: 'nile',
-    title: 'Life by the Nile',
-    shortLabel: 'Nile',
-    x: 18, // % from left
-    y: 65, // % from top
-    text: `Most Ancient Egyptians lived close to the River Nile. It provided fresh water, transport, and rich soil for growing crops.`,
-    funFact: `The Nile flooded every year, which helped farmers but could also damage houses if people built too close to the river.`,
+    id: 'sphinx',
+    title: 'The Great Sphinx',
+    shortLabel: 'Sphinx',
+    x: 20,   // left 20% across
+    y: 55,   // a bit below vertical centre
+    text: `The Sphinx has the body of a lion and the head of a person. It was carved from a single piece of rock over 4,000 years ago.`,
+    funFact: `The face of the Sphinx is thought to represent a pharaoh, but no one is completely sure which one.`,
   },
   {
-    id: 'pyramids',
-    title: 'Pyramids & Tombs',
-    shortLabel: 'Pyramids',
-    x: 65,
+    id: 'great-pyramid',
+    title: 'The Great Pyramid',
+    shortLabel: 'Great Pyramid',
+    x: 60,   // centrally placed big pyramid
+    y: 40,
+    text: `The Great Pyramid is one of the largest stone buildings ever made. It was a tomb for the pharaoh Khufu.`,
+    funFact: `For over 3,800 years, the Great Pyramid was the tallest man-made structure in the world.`,
+  },
+  {
+    id: 'smaller-pyramids',
+    title: 'Smaller Pyramids',
+    shortLabel: 'Other Pyramids',
+    x: 78,   // right-side pyramids
     y: 45,
-    text: `Pyramids were built as tombs for powerful rulers called pharaohs. Inside, there were passageways, chambers, and treasures for the afterlife.`,
-    funFact: `It took thousands of workers many years to build a single pyramid, using ramps, sledges, and simple tools.`,
+    text: `Next to the Great Pyramid are other pyramids built for different pharaohs and important people.`,
+    funFact: `The shape of a pyramid may have been chosen to help the pharaoh’s spirit climb up to the sun god Ra.`,
   },
   {
-    id: 'market',
-    title: 'Busy Marketplace',
-    shortLabel: 'Market',
-    x: 40,
+    id: 'desert-life',
+    title: 'Desert and Daily Life',
+    shortLabel: 'Desert',
+    x: 70,   // somewhere on the sand area
     y: 75,
-    text: `Markets were noisy, busy places where people traded food, cloth, pottery and tools. Most trading was done by swapping goods rather than using coins.`,
-    funFact: `Children often helped in family stalls, learning skills and trades instead of going to school like we do today.`,
-  },
-  {
-    id: 'temple',
-    title: 'Temple & Gods',
-    shortLabel: 'Temple',
-    x: 82,
-    y: 35,
-    text: `Temples were important religious centres. Priests performed daily rituals to honour the gods and goddesses of Ancient Egypt.`,
-    funFact: `Each city often had its own main god. People believed the gods controlled things like the Nile floods, weather, and health.`,
+    text: `The pyramids stand at the edge of the Sahara Desert. Workers, traders and travellers moved across this hot, dry land.`,
+    funFact: `During the day, desert temperatures can be very high, but at night the sand can feel surprisingly cold.`,
   },
 ];
+
 
 function LessonScene() {
   const [selectedId, setSelectedId] = useState(egyptHotspots[0]?.id || null);
