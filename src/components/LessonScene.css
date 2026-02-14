@@ -1,0 +1,140 @@
+/* Overall 3-panel layout */
+.immersive-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.4fr; /* left / centre / right */
+  height: calc(100vh - 80px); /* full height minus navbar */
+}
+
+/* Generic panel styling */
+.panel {
+  padding: 1.5rem;
+  color: #f9fafb;
+  background: radial-gradient(circle at top, #111827 0, #020617 60%);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.panel:last-child {
+  border-right: none;
+}
+
+.panel h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.panel-intro {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+/* Left panel list */
+.section-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Middle panel – panorama + hotspots */
+.panorama-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 2.5rem); /* leave space under title */
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(120deg, #1f2937, #020617); /* fallback if no image */
+}
+
+.panorama-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hotspot buttons */
+.hotspot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid #fbbf24;
+  background: rgba(251, 191, 36, 0.2);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotspot-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #fbbf24;
+}
+
+/* Active hotspot glow */
+.hotspot--active {
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.9);
+}
+
+/* Right panel – info card */
+.info-card {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.info-card h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.3rem;
+}
+
+.info-main-text {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.info-fact {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid #fbbf24;
+}
+
+.info-placeholder {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Basic responsive tweak */
+@media (max-width: 900px) {
+  .immersive-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .panel:last-child {
+    border-bottom: none;
+  }
+
+  .panorama-wrapper {
+    height: 260px;
+    margin-top: 1rem;
+  }
+}
