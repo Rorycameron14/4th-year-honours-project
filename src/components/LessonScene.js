@@ -15,8 +15,8 @@ const egyptHotspots = [
     id: 'great-pyramid',
     title: 'The Great Pyramid',
     shortLabel: 'Great Pyramid',
-    x: 60,   // centrally placed big pyramid
-    y: 40,
+    x: 63,  // centrally placed big pyramid
+    y:20,
     text: `The Great Pyramid is one of the largest stone buildings ever made. It was a tomb for the pharaoh Khufu.`,
     funFact: `For over 3,800 years, the Great Pyramid was the tallest man-made structure in the world.`,
   },
@@ -24,8 +24,8 @@ const egyptHotspots = [
     id: 'smaller-pyramids',
     title: 'Smaller Pyramids',
     shortLabel: 'Other Pyramids',
-    x: 78,   // right-side pyramids
-    y: 45,
+    x: 63,   // right-side pyramids
+    y: 50,
     text: `Next to the Great Pyramid are other pyramids built for different pharaohs and important people.`,
     funFact: `The shape of a pyramid may have been chosen to help the pharaoh’s spirit climb up to the sun god Ra.`,
   },
