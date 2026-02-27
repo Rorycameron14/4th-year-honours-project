@@ -1,0 +1,88 @@
+{
+  "sessions": [
+    {
+      "id": "0a2bf4fd-7471-4867-9d4d-4240291f6bf4",
+      "participantCode": "11",
+      "group": "ADHD",
+      "audioCondition": "silence",
+      "createdAt": "2026-02-27T14:28:15.680Z",
+      "endedAt": null,
+      "score": null
+    },
+    {
+      "id": "310df6b6-85dd-4b65-bbd7-b14aee9d977b",
+      "participantCode": "1",
+      "group": "ADHD",
+      "audioCondition": "silence",
+      "createdAt": "2026-02-27T15:17:46.994Z",
+      "endedAt": "2026-02-27T15:17:56.269Z",
+      "score": 1
+    },
+    {
+      "id": "ba5171fa-a3d5-4249-9a1f-c29d9c43c0ef",
+      "participantCode": "2",
+      "group": "ADHD",
+      "audioCondition": "white",
+      "createdAt": "2026-02-27T15:21:11.430Z",
+      "endedAt": "2026-02-27T15:21:23.675Z",
+      "score": 3
+    }
+  ],
+  "events": [],
+  "answers": [
+    {
+      "id": "3061b37d-2370-40c4-9813-169e76649fb5",
+      "sessionId": "310df6b6-85dd-4b65-bbd7-b14aee9d977b",
+      "questionId": "giza_q1",
+      "selectedIndex": 0,
+      "isCorrect": false,
+      "responseTimeMs": 18088,
+      "createdAt": "2026-02-27T15:17:53.587Z"
+    },
+    {
+      "id": "75a2fbfa-e937-4e9c-ae2f-6fff7b4a2a09",
+      "sessionId": "310df6b6-85dd-4b65-bbd7-b14aee9d977b",
+      "questionId": "nile_q1",
+      "selectedIndex": 0,
+      "isCorrect": true,
+      "responseTimeMs": 1404,
+      "createdAt": "2026-02-27T15:17:54.998Z"
+    },
+    {
+      "id": "cc68412f-ef25-436b-b5e6-d87ca3494c37",
+      "sessionId": "310df6b6-85dd-4b65-bbd7-b14aee9d977b",
+      "questionId": "giza_q2",
+      "selectedIndex": 1,
+      "isCorrect": false,
+      "responseTimeMs": 1257,
+      "createdAt": "2026-02-27T15:17:56.262Z"
+    },
+    {
+      "id": "9e19a9a9-1b93-4816-90b9-23dad24c56be",
+      "sessionId": "ba5171fa-a3d5-4249-9a1f-c29d9c43c0ef",
+      "questionId": "giza_q1",
+      "selectedIndex": 1,
+      "isCorrect": true,
+      "responseTimeMs": 8211,
+      "createdAt": "2026-02-27T15:21:13.794Z"
+    },
+    {
+      "id": "29494c8e-bd1c-4b76-bdd4-591a8ed8f947",
+      "sessionId": "ba5171fa-a3d5-4249-9a1f-c29d9c43c0ef",
+      "questionId": "nile_q1",
+      "selectedIndex": 0,
+      "isCorrect": true,
+      "responseTimeMs": 4624,
+      "createdAt": "2026-02-27T15:21:18.425Z"
+    },
+    {
+      "id": "72872907-a8fb-42ae-9d1c-0d6e588d94d7",
+      "sessionId": "ba5171fa-a3d5-4249-9a1f-c29d9c43c0ef",
+      "questionId": "giza_q2",
+      "selectedIndex": 0,
+      "isCorrect": true,
+      "responseTimeMs": 5225,
+      "createdAt": "2026-02-27T15:21:23.657Z"
+    }
+  ]
+}

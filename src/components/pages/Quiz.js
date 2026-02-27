@@ -1,3 +1,14 @@
-export default function Quiz() {
-  return <h1>Quiz</h1>;
+import React from 'react';
+import '../../App.css';
+import QuizSection from '../QuizSection';
+
+
+function Quiz() {
+  return (
+    <>
+      <QuizSection />
+    </>
+  );
 }
+
+export default Quiz;
