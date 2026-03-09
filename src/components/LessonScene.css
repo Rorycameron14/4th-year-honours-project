@@ -1,191 +1,141 @@
-/* Overall 3-panel layout */
-.immersive-layout {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1.4fr; /* left / centre / right */
-  height: calc(100vh - 80px); /* full height minus navbar */
-}
-
-/* Generic panel styling */
-.panel {
-  padding: 1.5rem;
-  color: #f9fafb;
-  background: radial-gradient(circle at top, #111827 0, #020617 60%);
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.panel:last-child {
-  border-right: none;
-}
-
-.panel h2 {
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-}
-
-.panel-intro {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin-bottom: 1rem;
-}
-
-/* Left panel list */
-.section-list {
-  list-style: none;
-  padding: 0;
+/* ---------- FULL 3-WALL VIEW (OVERRIDES) ---------- */
+html, body, #root {
+  height: 100%;
   margin: 0;
 }
 
-.section-list li {
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-/* Middle panel image wrapper */
-.panorama-wrapper {
-  position: relative;
-  width: 100%;
-  height: 60vh;      /* tweak to 65–70vh if you want it taller */
-  margin-top: 0.5rem;
-  border-radius: 12px;
+/* If your navbar is 80px tall */
+.immersive-wall {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
+  height: calc(100vh - 80px);
+  width: 100vw;
   overflow: hidden;
   background: #020617;
 }
 
-.panorama-image {
+/* Each wall must be full height */
+.wall-panel {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.wall-panel:last-child {
+  border-right: none;
+}
+
+/* Force the image to cover the entire wall */
+.wall-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;  /* fills nicely, slight crop at edges is fine */
+  object-fit: cover;
   display: block;
 }
 
-/* Hotspots */
+/* Touch-friendly hotspots */
 .hotspot {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 56px;
+  height: 56px;
   border-radius: 999px;
-  border: 2px solid #1d4ed8;              /* dark-ish blue border */
-  background: rgba(37, 99, 235, 0.18);    /* soft blue glow inside */
-  cursor: pointer;
+  border: 2px solid #1d4ed8;
+  background: rgba(37, 99, 235, 0.10);
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Make sure hotspots are above the image */
+.hotspot,
+.hotspot-popup {
+  z-index: 5;
 }
 
 .hotspot-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
-  background: #60a5fa;                    /* lighter blue dot */
+  background: #60a5fa;
 }
 
 .hotspot--active {
-  box-shadow: 0 0 16px rgba(37, 99, 235, 0.9);  /* blue glow when active */
+  box-shadow: 0 0 18px rgba(37, 99, 235, 0.85);
+  background: rgba(37, 99, 235, 0.18);
 }
 
-/* Right panel – info card */
-.info-card {
-  background: rgba(15, 23, 42, 0.8);
-  border-radius: 12px;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-}
-
-.info-card h3 {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.3rem;
-}
-
-.info-main-text {
-  font-size: 0.98rem;
-  line-height: 1.5;
-  margin-bottom: 0.75rem;
-}
-
-.info-fact {
-  font-size: 0.9rem;
-  margin: 0.5rem 0 0;
-  padding-left: 0.75rem;
-  border-left: 3px solid #fbbf24;
-}
-
-.info-placeholder {
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-/* Scene switcher (Previous / Next) */
-.scene-switcher {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.9rem;
-  padding: 0.5rem 0.75rem;
-  background: radial-gradient(circle at top left, #0f172a, #020617);
-  border-radius: 999px;
+/* Pop-up */
+.hotspot-popup {
+  position: absolute;
+  transform: translate(-50%, -115%);
+  width: min(320px, 90%);
+  background: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 14px;
+  padding: 14px 14px 12px 14px;
+  color: #e5e7eb;
+  z-index: 10;
+  pointer-events: auto;
 }
 
-.scene-name {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #e5e7eb;
-  opacity: 0.9;
-}
-
-/* Shared button style */
-.scene-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.7);
-  background: rgba(15, 23, 42, 0.9);
-  color: #e5e7eb;
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: rgba(229, 231, 235, 0.9);
+  font-size: 16px;
   cursor: pointer;
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.12s ease;
 }
 
-/* Hover/active states */
-.scene-btn:hover {
-  background: #1d4ed8;
-  border-color: #2563eb;
-  transform: translateY(-1px);
+.popup-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: #f9fafb;
+  padding-right: 26px; /* space for X */
 }
 
-.scene-btn:active {
-  transform: translateY(0);
-  background: #1e40af;
+.popup-text {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
+  opacity: 0.95;
 }
 
-/* Basic responsive tweak */
+.popup-fact {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  padding-left: 10px;
+  border-left: 3px solid #60a5fa;
+  opacity: 0.95;
+}
+
+/* If you resize small, stack walls */
 @media (max-width: 900px) {
-  .immersive-layout {
+  .immersive-wall {
     grid-template-columns: 1fr;
     height: auto;
   }
 
-  .panel {
+  .wall-panel {
+    height: 60vh;
     border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   }
 
-  .panel:last-child {
+  .wall-panel:last-child {
     border-bottom: none;
-  }
-
-  .panorama-wrapper {
-    height: 260px;
-    margin-top: 1rem;
   }
 }

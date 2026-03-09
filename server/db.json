@@ -26,6 +26,33 @@
       "createdAt": "2026-02-27T15:21:11.430Z",
       "endedAt": "2026-02-27T15:21:23.675Z",
       "score": 3
+    },
+    {
+      "id": "6cbcde8a-8f31-413c-8a75-0fbf8363fb23",
+      "participantCode": "1",
+      "group": "ADHD",
+      "audioCondition": "silence",
+      "createdAt": "2026-02-27T16:10:49.991Z",
+      "endedAt": "2026-02-27T16:10:54.429Z",
+      "score": 1
+    },
+    {
+      "id": "2bd4bd17-f70d-40a0-87db-c996fe48658b",
+      "participantCode": "1",
+      "group": "Control",
+      "audioCondition": "silence",
+      "createdAt": "2026-03-03T12:04:06.115Z",
+      "endedAt": null,
+      "score": null
+    },
+    {
+      "id": "e055a38c-cb9b-424c-bd72-1ca28df386ca",
+      "participantCode": "1",
+      "group": "Control",
+      "audioCondition": "silence",
+      "createdAt": "2026-03-07T15:16:15.167Z",
+      "endedAt": "2026-03-07T15:16:22.198Z",
+      "score": 0
     }
   ],
   "events": [],
@@ -83,6 +110,60 @@
       "isCorrect": true,
       "responseTimeMs": 5225,
       "createdAt": "2026-02-27T15:21:23.657Z"
+    },
+    {
+      "id": "624064d1-967a-4ca6-924a-a1babebd5845",
+      "sessionId": "6cbcde8a-8f31-413c-8a75-0fbf8363fb23",
+      "questionId": "giza_q1",
+      "selectedIndex": 1,
+      "isCorrect": true,
+      "responseTimeMs": 7452,
+      "createdAt": "2026-02-27T16:10:52.107Z"
+    },
+    {
+      "id": "b710dae2-3474-46b1-8c0e-6e50ab7affb1",
+      "sessionId": "6cbcde8a-8f31-413c-8a75-0fbf8363fb23",
+      "questionId": "nile_q1",
+      "selectedIndex": 1,
+      "isCorrect": false,
+      "responseTimeMs": 1166,
+      "createdAt": "2026-02-27T16:10:53.278Z"
+    },
+    {
+      "id": "c2577f29-901c-4252-a9e3-37c0bb0938ab",
+      "sessionId": "6cbcde8a-8f31-413c-8a75-0fbf8363fb23",
+      "questionId": "giza_q2",
+      "selectedIndex": 1,
+      "isCorrect": false,
+      "responseTimeMs": 1135,
+      "createdAt": "2026-02-27T16:10:54.424Z"
+    },
+    {
+      "id": "f208d078-94e7-4b13-9560-db4c30b07604",
+      "sessionId": "e055a38c-cb9b-424c-bd72-1ca28df386ca",
+      "questionId": "giza_q1",
+      "selectedIndex": 2,
+      "isCorrect": false,
+      "responseTimeMs": 14465,
+      "createdAt": "2026-03-07T15:16:20.105Z"
+    },
+    {
+      "id": "4e4221c6-e9e6-4ce2-b80a-ca21401cbe2a",
+      "sessionId": "e055a38c-cb9b-424c-bd72-1ca28df386ca",
+      "questionId": "nile_q1",
+      "selectedIndex": 2,
+      "isCorrect": false,
+      "responseTimeMs": 1252,
+      "createdAt": "2026-03-07T15:16:21.369Z"
+    },
+    {
+      "id": "62e09887-1a30-4cfa-8408-baf75cb28857",
+      "sessionId": "e055a38c-cb9b-424c-bd72-1ca28df386ca",
+      "questionId": "giza_q2",
+      "selectedIndex": 2,
+      "isCorrect": false,
+      "responseTimeMs": 810,
+      "createdAt": "2026-03-07T15:16:22.191Z"
     }
   ]
 }
