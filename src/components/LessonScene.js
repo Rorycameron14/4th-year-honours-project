@@ -1,5 +1,4 @@
-// src/components/LessonScene.js
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './LessonScene.css';
 
 const walls = [
@@ -122,74 +121,193 @@ const walls = [
   },
 ];
 
+const SOUND_OPTIONS = {
+  silence: '',
+  white: '/audio/White_noise.mp3',
+  egyptian: '/audio/Egyptian_track.mp3',
+};
+
 function LessonScene() {
   const [active, setActive] = useState(null);
-  // active shape: { wallId, hotspot }
+  const [selectedSound, setSelectedSound] = useState('silence');
+  const [hasStarted, setHasStarted] = useState(false);
+  const [showSoundMenu, setShowSoundMenu] = useState(true);
+
+  const audioRef = useRef(null);
 
   const closePopup = () => setActive(null);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!hasStarted || selectedSound === 'silence') {
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+      return;
+    }
+
+    audio.pause();
+    audio.src = SOUND_OPTIONS[selectedSound];
+    audio.loop = true;
+    audio.volume = 0.35;
+    audio.load();
+
+    audio.play().catch((err) => {
+      console.log('Audio playback blocked:', err);
+    });
+  }, [selectedSound, hasStarted]);
+
+  const handleStart = () => {
+    setHasStarted(true);
+    setShowSoundMenu(false);
+  };
+
   return (
-    <div className="immersive-wall" onPointerDown={() => closePopup()}>
-      {walls.map((wall) => (
+    <>
+      <audio ref={audioRef} preload="auto" />
+
+      {showSoundMenu && (
         <div
-          key={wall.id}
-          className={`wall-panel wall-panel--${wall.id}`}
-          onPointerDown={(e) => e.stopPropagation()} // don't close when tapping inside panel
+          className="sound-menu-overlay"
+          onPointerDown={(e) => e.stopPropagation()}
         >
-          <img className="wall-image" src={wall.image} alt={wall.name} />
+          <div
+            className="sound-menu"
+            onPointerDown={(e) => e.stopPropagation()}
+          >
+            <h2>Which sound are you playing?</h2>
 
-          {wall.hotspots.map((hotspot) => (
-            <button
-              key={hotspot.id}
-              type="button"
-              className={
-                'hotspot' +
-                (active?.wallId === wall.id && active?.hotspot?.id === hotspot.id
-                  ? ' hotspot--active'
-                  : '')
-              }
-              style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
-              onPointerDown={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setActive({ wallId: wall.id, hotspot });
-              }}
-            >
-              <div className="hotspot-dot" />
-            </button>
-          ))}
+            <label>
+              <input
+                type="radio"
+                name="sound"
+                value="silence"
+                checked={selectedSound === 'silence'}
+                onChange={(e) => setSelectedSound(e.target.value)}
+              />
+              Silence
+            </label>
 
-          {/* Pop-up (game style) */}
-          {active?.wallId === wall.id && active?.hotspot && (
-            <div
-              className="hotspot-popup"
-              style={{
-                left: `${active.hotspot.x}%`,
-                top: `${active.hotspot.y}%`,
-              }}
-              onPointerDown={(e) => e.stopPropagation()}
-            >
+            <label>
+              <input
+                type="radio"
+                name="sound"
+                value="white"
+                checked={selectedSound === 'white'}
+                onChange={(e) => setSelectedSound(e.target.value)}
+              />
+              White Noise
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="sound"
+                value="egyptian"
+                checked={selectedSound === 'egyptian'}
+                onChange={(e) => setSelectedSound(e.target.value)}
+              />
+              Egyptian Themed
+            </label>
+
+            {!hasStarted ? (
+              <button type="button" onClick={handleStart}>
+                Start Experience
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setShowSoundMenu(false)}
+                >
+                  Apply
+                </button>
+                <button
+                  type="button"
+                  className="secondary-sound-button"
+                  onClick={() => setShowSoundMenu(false)}
+                >
+                  Close
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {hasStarted && (
+        <button
+          type="button"
+          className="sound-settings-button"
+          onClick={() => setShowSoundMenu(true)}
+        >
+          Sound Settings
+        </button>
+      )}
+
+      <div className="immersive-wall" onPointerDown={() => closePopup()}>
+        {walls.map((wall) => (
+          <div
+            key={wall.id}
+            className={`wall-panel wall-panel--${wall.id}`}
+            onPointerDown={(e) => e.stopPropagation()}
+          >
+            <img className="wall-image" src={wall.image} alt={wall.name} />
+
+            {wall.hotspots.map((hotspot) => (
               <button
-                className="popup-close"
+                key={hotspot.id}
                 type="button"
+                className={
+                  'hotspot' +
+                  (active?.wallId === wall.id && active?.hotspot?.id === hotspot.id
+                    ? ' hotspot--active'
+                    : '')
+                }
+                style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
                 onPointerDown={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
-                  closePopup();
+                  setActive({ wallId: wall.id, hotspot });
                 }}
               >
-                ✕
+                <div className="hotspot-dot" />
               </button>
+            ))}
 
-              <div className="popup-title">{active.hotspot.title}</div>
-              <div className="popup-text">{active.hotspot.text}</div>
-              <div className="popup-fact">
-                <strong>Did you know?</strong> {active.hotspot.funFact}
+            {active?.wallId === wall.id && active?.hotspot && (
+              <div
+                className="hotspot-popup"
+                style={{
+                  left: `${active.hotspot.x}%`,
+                  top: `${active.hotspot.y}%`,
+                }}
+                onPointerDown={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="popup-close"
+                  type="button"
+                  onPointerDown={(e) => {
+                    e.stopPropagation();
+                    closePopup();
+                  }}
+                >
+                  ✕
+                </button>
+
+                <div className="popup-title">{active.hotspot.title}</div>
+                <div className="popup-text">{active.hotspot.text}</div>
+                <div className="popup-fact">
+                  <strong>Did you know?</strong> {active.hotspot.funFact}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 

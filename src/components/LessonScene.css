@@ -1,15 +1,11 @@
-/* ---------- FULL 3-WALL VIEW (OVERRIDES) ---------- */
-html, body, #root {
-  height: 100%;
-  margin: 0;
-}
+/* ---------- FULL 3-WALL VIEW ---------- */
 
 /* If your navbar is 80px tall */
 .immersive-wall {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
   height: calc(100vh - 80px);
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   background: #020617;
 }
@@ -49,7 +45,6 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
@@ -104,7 +99,7 @@ html, body, #root {
   font-size: 1.05rem;
   margin-bottom: 8px;
   color: #f9fafb;
-  padding-right: 26px; /* space for X */
+  padding-right: 26px;
 }
 
 .popup-text {
@@ -122,11 +117,89 @@ html, body, #root {
   opacity: 0.95;
 }
 
-/* If you resize small, stack walls */
+/* ---------- SOUND MENU ---------- */
+.sound-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.sound-menu {
+  width: min(420px, 92vw);
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 18px;
+  padding: 24px;
+  color: #e5e7eb;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.sound-menu h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.3rem;
+  color: #f8fafc;
+}
+
+.sound-menu label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #e5e7eb;
+}
+
+.sound-menu input[type="radio"] {
+  accent-color: #2563eb;
+  transform: scale(1.1);
+}
+
+.sound-menu button {
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sound-menu button:first-of-type {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.secondary-sound-button {
+  background: rgba(148, 163, 184, 0.18);
+  color: #e5e7eb;
+}
+
+.sound-settings-button {
+  position: fixed;
+  top: 96px;
+  right: 18px;
+  z-index: 9998;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 @media (max-width: 900px) {
   .immersive-wall {
     grid-template-columns: 1fr;
     height: auto;
+    min-height: calc(100vh - 80px);
   }
 
   .wall-panel {
@@ -137,5 +210,10 @@ html, body, #root {
 
   .wall-panel:last-child {
     border-bottom: none;
+  }
+
+  .sound-settings-button {
+    top: 16px;
+    right: 16px;
   }
 }

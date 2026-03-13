@@ -1,0 +1,131 @@
+const GRAPHQL_URL = 'https://graphqlserver-nkjy.onrender.com/graphql';
+
+async function gqlRequest(query, variables = {}) {
+  const res = await fetch(GRAPHQL_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query, variables }),
+  });
+
+  const json = await res.json();
+
+  if (json.errors) {
+    console.error(json.errors);
+    throw new Error(json.errors[0]?.message || 'GraphQL request failed');
+  }
+
+  return json.data;
+}
+
+export async function startSession(participantCode, group, audioCondition) {
+  const query = `
+    mutation StartSession($participantCode: String!, $group: String!, $audioCondition: String!) {
+      startSession(participantCode: $participantCode, group: $group, audioCondition: $audioCondition) {
+        id
+        participantCode
+        group
+        audioCondition
+        createdAt
+      }
+    }
+  `;
+
+  const data = await gqlRequest(query, {
+    participantCode,
+    group,
+    audioCondition,
+  });
+
+  return data.startSession;
+}
+
+export async function logHotspot(sessionId, sceneId, hotspotId) {
+  const query = `
+    mutation LogHotspot($sessionId: ID!, $sceneId: String!, $hotspotId: String!) {
+      logHotspot(sessionId: $sessionId, sceneId: $sceneId, hotspotId: $hotspotId) {
+        id
+        sessionId
+        sceneId
+        hotspotId
+        createdAt
+      }
+    }
+  `;
+
+  const data = await gqlRequest(query, {
+    sessionId,
+    sceneId,
+    hotspotId,
+  });
+
+  return data.logHotspot;
+}
+
+export async function submitAnswer(sessionId, questionId, selectedIndex, isCorrect, responseTimeMs) {
+  const query = `
+    mutation SubmitAnswer(
+      $sessionId: ID!,
+      $questionId: String!,
+      $selectedIndex: Int!,
+      $isCorrect: Boolean!,
+      $responseTimeMs: Int!
+    ) {
+      submitAnswer(
+        sessionId: $sessionId,
+        questionId: $questionId,
+        selectedIndex: $selectedIndex,
+        isCorrect: $isCorrect,
+        responseTimeMs: $responseTimeMs
+      ) {
+        id
+        questionId
+        selectedIndex
+        isCorrect
+        responseTimeMs
+        createdAt
+      }
+    }
+  `;
+
+  const data = await gqlRequest(query, {
+    sessionId,
+    questionId,
+    selectedIndex,
+    isCorrect,
+    responseTimeMs,
+  });
+
+  return data.submitAnswer;
+}
+
+export async function endSession(sessionId, score) {
+  const query = `
+    mutation EndSession($sessionId: ID!, $score: Int!) {
+      endSession(sessionId: $sessionId, score: $score) {
+        id
+        score
+        endedAt
+      }
+    }
+  `;
+
+  const data = await gqlRequest(query, {
+    sessionId,
+    score,
+  });
+
+  return data.endSession;
+}
+
+export async function checkHealth() {
+  const query = `
+    query Health {
+      health
+    }
+  `;
+
+  const data = await gqlRequest(query);
+  return data.health;
+}
