@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './LessonScene.css';
+import { startSession, logHotspot } from './graphql';
 
 const walls = [
   {
@@ -132,6 +133,7 @@ function LessonScene() {
   const [selectedSound, setSelectedSound] = useState('silence');
   const [hasStarted, setHasStarted] = useState(false);
   const [showSoundMenu, setShowSoundMenu] = useState(true);
+  const [sessionId, setSessionId] = useState(localStorage.getItem('sessionId') || '');
 
   const audioRef = useRef(null);
 
@@ -159,16 +161,36 @@ function LessonScene() {
     });
   }, [selectedSound, hasStarted]);
 
-  const handleStart = () => {
-    setHasStarted(true);
-    setShowSoundMenu(false);
+  const handleStart = async () => {
+    try {
+      const participantCode = `P-${Date.now()}`;
+      const group = 'egypt-study';
+
+      const session = await startSession(
+        participantCode,
+        group,
+        selectedSound
+      );
+
+      setSessionId(session.id);
+      localStorage.setItem('sessionId', session.id);
+      localStorage.setItem('participantCode', participantCode);
+      localStorage.setItem('group', group);
+      localStorage.setItem('audioCondition', selectedSound);
+
+      setHasStarted(true);
+      setShowSoundMenu(false);
+    } catch (err) {
+      console.error('Failed to start session:', err);
+      alert('Could not start session. Check the console.');
+    }
   };
 
   return (
     <>
       <audio ref={audioRef} preload="auto" />
 
-      {showSoundMenu && (
+      {showSoundMenu && !hasStarted && (
         <div
           className="sound-menu-overlay"
           onPointerDown={(e) => e.stopPropagation()}
@@ -212,39 +234,11 @@ function LessonScene() {
               Egyptian Themed
             </label>
 
-            {!hasStarted ? (
-              <button type="button" onClick={handleStart}>
-                Start Experience
-              </button>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setShowSoundMenu(false)}
-                >
-                  Apply
-                </button>
-                <button
-                  type="button"
-                  className="secondary-sound-button"
-                  onClick={() => setShowSoundMenu(false)}
-                >
-                  Close
-                </button>
-              </>
-            )}
+            <button type="button" onClick={handleStart}>
+              Start Experience
+            </button>
           </div>
         </div>
-      )}
-
-      {hasStarted && (
-        <button
-          type="button"
-          className="sound-settings-button"
-          onClick={() => setShowSoundMenu(true)}
-        >
-          Sound Settings
-        </button>
       )}
 
       <div className="immersive-wall" onPointerDown={() => closePopup()}>
@@ -267,10 +261,21 @@ function LessonScene() {
                     : '')
                 }
                 style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
-                onPointerDown={(e) => {
+                onPointerDown={async (e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   setActive({ wallId: wall.id, hotspot });
+
+                  try {
+                    const currentSessionId =
+                      sessionId || localStorage.getItem('sessionId');
+
+                    if (currentSessionId) {
+                      await logHotspot(currentSessionId, wall.id, hotspot.id);
+                    }
+                  } catch (err) {
+                    console.error('Failed to log hotspot:', err);
+                  }
                 }}
               >
                 <div className="hotspot-dot" />

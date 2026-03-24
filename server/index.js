@@ -26,6 +26,9 @@ async function writeDB(db) {
 const typeDefs = `#graphql
   type Query {
     health: String!
+    sessions: [Session!]!
+    events: [Event!]!
+    answers: [Answer!]!
   }
 
   type Session {
@@ -68,7 +71,20 @@ const typeDefs = `#graphql
 const resolvers = {
   Query: {
     health: () => "ok",
+    sessions: async () => {
+      const db = await readDB();
+      return db.sessions;
+    },
+    events: async () => {
+      const db = await readDB();
+      return db.events;
+    },
+    answers: async () => {
+      const db = await readDB();
+      return db.answers;
+    },
   },
+
   Mutation: {
     startSession: async (_, { participantCode, group, audioCondition }) => {
       const db = await readDB();
@@ -133,6 +149,10 @@ async function start() {
   const app = express();
   app.use(cors({ origin: "*" }));
   app.use(express.json());
+
+  app.get("/", (req, res) => {
+    res.send("GraphQL server is running");
+  });
 
   const apollo = new ApolloServer({ typeDefs, resolvers });
   await apollo.start();

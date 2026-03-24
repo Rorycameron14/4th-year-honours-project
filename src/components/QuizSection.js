@@ -1,32 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { gql } from "@apollo/client";
-import { useMutation } from "@apollo/client/react";
+import { submitAnswer, endSession } from "./graphql";
 import "./QuizSection.css";
-
-const START_SESSION = gql`
-  mutation StartSession($participantCode: String!, $group: String!, $audioCondition: String!) {
-    startSession(participantCode: $participantCode, group: $group, audioCondition: $audioCondition) {
-      id
-    }
-  }
-`;
-
-const SUBMIT_ANSWER = gql`
-  mutation SubmitAnswer($sessionId: ID!, $questionId: String!, $selectedIndex: Int!, $isCorrect: Boolean!, $responseTimeMs: Int!) {
-    submitAnswer(sessionId: $sessionId, questionId: $questionId, selectedIndex: $selectedIndex, isCorrect: $isCorrect, responseTimeMs: $responseTimeMs) {
-      id
-    }
-  }
-`;
-
-const END_SESSION = gql`
-  mutation EndSession($sessionId: ID!, $score: Int!) {
-    endSession(sessionId: $sessionId, score: $score) {
-      id
-      score
-    }
-  }
-`;
 
 const QUESTIONS = [
   {
@@ -52,64 +26,71 @@ const QUESTIONS = [
 function QuizSection() {
   const [sessionId, setSessionId] = useState("");
   const [participantCode, setParticipantCode] = useState("");
-  const [group, setGroup] = useState("ADHD");
-  const [audioCondition, setAudioCondition] = useState("silence");
+  const [group, setGroup] = useState("");
+  const [audioCondition, setAudioCondition] = useState("");
 
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [error, setError] = useState("");
 
   const startedAtRef = useRef(Date.now());
 
-  const [startSession] = useMutation(START_SESSION);
-  const [submitAnswer] = useMutation(SUBMIT_ANSWER);
-  const [endSession] = useMutation(END_SESSION);
-
   const current = QUESTIONS[index];
+
+  useEffect(() => {
+    const savedSessionId = localStorage.getItem("sessionId") || "";
+    const savedParticipantCode = localStorage.getItem("participantCode") || "";
+    const savedGroup = localStorage.getItem("group") || "";
+    const savedAudioCondition = localStorage.getItem("audioCondition") || "";
+
+    setSessionId(savedSessionId);
+    setParticipantCode(savedParticipantCode);
+    setGroup(savedGroup);
+    setAudioCondition(savedAudioCondition);
+  }, []);
 
   useEffect(() => {
     startedAtRef.current = Date.now();
     setSelected(null);
   }, [index]);
 
-  const handleStart = async () => {
-    if (!participantCode.trim()) return;
-
-    const res = await startSession({
-      variables: { participantCode, group, audioCondition },
-    });
-
-    const newId = res.data.startSession.id;
-    setSessionId(newId);
-  };
-
   const handleNext = async () => {
-    if (selected === null) return;
-
-    const responseTimeMs = Date.now() - startedAtRef.current;
-    const isCorrect = selected === current.correctIndex;
-
-    await submitAnswer({
-      variables: {
-        sessionId,
-        questionId: current.id,
-        selectedIndex: selected,
-        isCorrect,
-        responseTimeMs,
-      },
-    });
-
-    const newScore = score + (isCorrect ? 1 : 0);
-    setScore(newScore);
-
-    if (index === QUESTIONS.length - 1) {
-      setFinished(true);
-      await endSession({ variables: { sessionId, score: newScore } });
+    if (!sessionId) {
+      setError("No active session found. Please start the lesson first.");
       return;
     }
 
-    setIndex(index + 1);
+    if (selected === null) return;
+
+    try {
+      const responseTimeMs = Date.now() - startedAtRef.current;
+      const isCorrect = selected === current.correctIndex;
+      const newScore = score + (isCorrect ? 1 : 0);
+
+      await submitAnswer(
+        sessionId,
+        current.id,
+        selected,
+        isCorrect,
+        responseTimeMs
+      );
+
+      setScore(newScore);
+
+      if (index === QUESTIONS.length - 1) {
+        await endSession(sessionId, newScore);
+        setFinished(true);
+        return;
+      }
+
+      setIndex(index + 1);
+      setError("");
+    } catch (err) {
+      console.error("Failed to submit quiz answer:", err);
+      setError("Could not save your answer. Check the console.");
+    }
   };
 
   if (!sessionId && !finished) {
@@ -117,32 +98,10 @@ function QuizSection() {
       <div className="quiz-wrap">
         <div className="quiz-card">
           <h1 className="quiz-title">Quiz</h1>
-          <p className="quiz-subtitle">Enter a participant code to start logging results.</p>
-
-          <div className="quiz-form">
-            <input
-              className="quiz-input"
-              value={participantCode}
-              onChange={(e) => setParticipantCode(e.target.value)}
-              placeholder="Participant code (e.g. P01)"
-            />
-
-            <select className="quiz-input" value={group} onChange={(e) => setGroup(e.target.value)}>
-              <option value="ADHD">ADHD</option>
-              <option value="Dyslexia">Dyslexia</option>
-              <option value="Control">Control</option>
-            </select>
-
-            <select className="quiz-input" value={audioCondition} onChange={(e) => setAudioCondition(e.target.value)}>
-              <option value="silence">Silence</option>
-              <option value="white">White noise</option>
-              <option value="ambient">Ambient</option>
-            </select>
-
-            <button className="quiz-primary" onClick={handleStart}>
-              Start Quiz
-            </button>
-          </div>
+          <p className="quiz-subtitle">No active lesson session found.</p>
+          <p className="quiz-meta">
+            Start the lesson first, choose a sound condition, and then open the quiz.
+          </p>
         </div>
       </div>
     );
@@ -156,6 +115,9 @@ function QuizSection() {
           <p className="quiz-subtitle">
             Score: <strong>{score}</strong> / {QUESTIONS.length}
           </p>
+          <p className="quiz-meta">Participant: {participantCode || "Unknown"}</p>
+          <p className="quiz-meta">Group: {group || "Unknown"}</p>
+          <p className="quiz-meta">Audio: {audioCondition || "Unknown"}</p>
           <p className="quiz-meta">Session ID: {sessionId}</p>
         </div>
       </div>
@@ -169,12 +131,17 @@ function QuizSection() {
           Question {index + 1} of {QUESTIONS.length}
         </p>
 
+        <p className="quiz-meta">
+          Participant: {participantCode || "Unknown"} | Audio: {audioCondition || "Unknown"}
+        </p>
+
         <h1 className="quiz-title">{current.question}</h1>
 
         <div className="quiz-options">
           {current.options.map((opt, i) => (
             <button
               key={i}
+              type="button"
               className={"quiz-option" + (selected === i ? " quiz-option--selected" : "")}
               onClick={() => setSelected(i)}
             >
@@ -183,7 +150,13 @@ function QuizSection() {
           ))}
         </div>
 
-        <button className="quiz-primary" onClick={handleNext}>
+        {error && <p className="quiz-meta">{error}</p>}
+
+        <button
+          type="button"
+          className="quiz-primary"
+          onClick={handleNext}
+        >
           {index === QUESTIONS.length - 1 ? "Finish" : "Next"}
         </button>
       </div>
