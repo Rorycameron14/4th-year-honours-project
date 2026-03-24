@@ -129,3 +129,35 @@ export async function checkHealth() {
   const data = await gqlRequest(query);
   return data.health;
 }
+
+export async function updateSessionDetails(sessionId, participantCode, group, audioCondition) {
+  const query = `
+    mutation UpdateSessionDetails(
+      $sessionId: ID!,
+      $participantCode: String!,
+      $group: String!,
+      $audioCondition: String!
+    ) {
+      updateSessionDetails(
+        sessionId: $sessionId,
+        participantCode: $participantCode,
+        group: $group,
+        audioCondition: $audioCondition
+      ) {
+        id
+        participantCode
+        group
+        audioCondition
+      }
+    }
+  `;
+
+  const data = await gqlRequest(query, {
+    sessionId,
+    participantCode,
+    group,
+    audioCondition,
+  });
+
+  return data.updateSessionDetails;
+}

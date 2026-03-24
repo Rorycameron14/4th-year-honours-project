@@ -163,20 +163,17 @@ function LessonScene() {
 
   const handleStart = async () => {
     try {
-      const participantCode = `P-${Date.now()}`;
-      const group = 'egypt-study';
-
       const session = await startSession(
-        participantCode,
-        group,
+        'TEMP',
+        'TEMP',
         selectedSound
       );
 
       setSessionId(session.id);
       localStorage.setItem('sessionId', session.id);
-      localStorage.setItem('participantCode', participantCode);
-      localStorage.setItem('group', group);
       localStorage.setItem('audioCondition', selectedSound);
+      localStorage.removeItem('participantCode');
+      localStorage.removeItem('group');
 
       setHasStarted(true);
       setShowSoundMenu(false);

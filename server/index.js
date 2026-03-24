@@ -61,6 +61,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     startSession(participantCode: String!, group: String!, audioCondition: String!): Session!
+    updateSessionDetails(sessionId: ID!, participantCode: String!, group: String!, audioCondition: String!): Session!
     logHotspot(sessionId: ID!, sceneId: String!, hotspotId: String!): Event!
     submitAnswer(sessionId: ID!, questionId: String!, selectedIndex: Int!, isCorrect: Boolean!, responseTimeMs: Int!): Answer!
     endSession(sessionId: ID!, score: Int!): Session!
@@ -102,6 +103,19 @@ const resolvers = {
       return session;
     },
 
+    updateSessionDetails: async (_, { sessionId, participantCode, group, audioCondition }) => {
+    const db = await readDB();
+    const session = db.sessions.find((s) => s.id === sessionId);
+    if (!session) throw new Error("Session not found");
+
+    session.participantCode = participantCode;
+    session.group = group;
+    session.audioCondition = audioCondition;
+
+      await writeDB(db);
+      return session;
+    },
+
     logHotspot: async (_, { sessionId, sceneId, hotspotId }) => {
       const db = await readDB();
       const event = {
@@ -136,8 +150,10 @@ const resolvers = {
       const db = await readDB();
       const session = db.sessions.find((s) => s.id === sessionId);
       if (!session) throw new Error("Session not found");
+
       session.score = score;
       session.endedAt = new Date().toISOString();
+
       await writeDB(db);
       return session;
     },
