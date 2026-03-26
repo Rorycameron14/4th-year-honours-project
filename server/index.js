@@ -22,6 +22,26 @@ async function writeDB(db) {
   await fs.writeFile(DB_FILE, JSON.stringify(db, null, 2), "utf-8");
 }
 
+// ---- csv helper ----
+function toCSV(rows) {
+  if (!rows.length) return "";
+
+  const headers = Object.keys(rows[0]);
+
+  const escape = (value) => {
+    if (value === null || value === undefined) return "";
+    const str = String(value).replace(/"/g, '""');
+    return `"${str}"`;
+  };
+
+  const lines = [
+    headers.join(","),
+    ...rows.map((row) => headers.map((h) => escape(row[h])).join(",")),
+  ];
+
+  return lines.join("\n");
+}
+
 // ---- schema ----
 const typeDefs = `#graphql
   type Query {
@@ -103,14 +123,17 @@ const resolvers = {
       return session;
     },
 
-    updateSessionDetails: async (_, { sessionId, participantCode, group, audioCondition }) => {
-    const db = await readDB();
-    const session = db.sessions.find((s) => s.id === sessionId);
-    if (!session) throw new Error("Session not found");
+    updateSessionDetails: async (
+      _,
+      { sessionId, participantCode, group, audioCondition }
+    ) => {
+      const db = await readDB();
+      const session = db.sessions.find((s) => s.id === sessionId);
+      if (!session) throw new Error("Session not found");
 
-    session.participantCode = participantCode;
-    session.group = group;
-    session.audioCondition = audioCondition;
+      session.participantCode = participantCode;
+      session.group = group;
+      session.audioCondition = audioCondition;
 
       await writeDB(db);
       return session;
@@ -130,7 +153,10 @@ const resolvers = {
       return event;
     },
 
-    submitAnswer: async (_, { sessionId, questionId, selectedIndex, isCorrect, responseTimeMs }) => {
+    submitAnswer: async (
+      _,
+      { sessionId, questionId, selectedIndex, isCorrect, responseTimeMs }
+    ) => {
       const db = await readDB();
       const answer = {
         id: randomUUID(),
@@ -168,6 +194,30 @@ async function start() {
 
   app.get("/", (req, res) => {
     res.send("GraphQL server is running");
+  });
+
+  app.get("/export/sessions.csv", async (req, res) => {
+    const db = await readDB();
+    const csv = toCSV(db.sessions);
+    res.header("Content-Type", "text/csv");
+    res.attachment("sessions.csv");
+    res.send(csv);
+  });
+
+  app.get("/export/events.csv", async (req, res) => {
+    const db = await readDB();
+    const csv = toCSV(db.events);
+    res.header("Content-Type", "text/csv");
+    res.attachment("events.csv");
+    res.send(csv);
+  });
+
+  app.get("/export/answers.csv", async (req, res) => {
+    const db = await readDB();
+    const csv = toCSV(db.answers);
+    res.header("Content-Type", "text/csv");
+    res.attachment("answers.csv");
+    res.send(csv);
   });
 
   const apollo = new ApolloServer({ typeDefs, resolvers });
