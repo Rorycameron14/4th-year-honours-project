@@ -129,11 +129,15 @@ const SOUND_OPTIONS = {
 };
 
 function LessonScene() {
+  const storedSessionId = localStorage.getItem('sessionId') || '';
+  const storedAudioCondition =
+    localStorage.getItem('audioCondition') || 'silence';
+
   const [active, setActive] = useState(null);
-  const [selectedSound, setSelectedSound] = useState('silence');
-  const [hasStarted, setHasStarted] = useState(false);
-  const [showSoundMenu, setShowSoundMenu] = useState(true);
-  const [sessionId, setSessionId] = useState(localStorage.getItem('sessionId') || '');
+  const [selectedSound, setSelectedSound] = useState(storedAudioCondition);
+  const [hasStarted, setHasStarted] = useState(Boolean(storedSessionId));
+  const [showSoundMenu, setShowSoundMenu] = useState(!storedSessionId);
+  const [sessionId, setSessionId] = useState(storedSessionId);
 
   const audioRef = useRef(null);
 
@@ -161,11 +165,28 @@ function LessonScene() {
     });
   }, [selectedSound, hasStarted]);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    return () => {
+      if (audio) {
+        audio.pause();
+      }
+    };
+  }, []);
+
   const handleStart = async () => {
+    if (sessionId) {
+      localStorage.setItem('audioCondition', selectedSound);
+      setHasStarted(true);
+      setShowSoundMenu(false);
+      return;
+    }
+
     try {
       const session = await startSession(
-        'TEMP',
-        'TEMP',
+        '',
+        '',
         selectedSound
       );
 
