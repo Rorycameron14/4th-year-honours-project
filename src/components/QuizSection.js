@@ -95,6 +95,7 @@ function QuizSection() {
   const [group, setGroup] = useState("");
   const [audioCondition, setAudioCondition] = useState("");
   const [detailsSaved, setDetailsSaved] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -168,6 +169,10 @@ function QuizSection() {
   };
 
   const handleNext = async () => {
+    if (isSubmitting) {
+      return;
+    }
+
     if (!sessionId) {
       setError("No active session found. Please start the lesson first.");
       return;
@@ -179,6 +184,8 @@ function QuizSection() {
     }
 
     try {
+      setIsSubmitting(true);
+
       const responseTimeMs = Date.now() - startedAtRef.current;
       const isCorrect = selected === current.correctIndex;
       const newScore = score + (isCorrect ? 1 : 0);
@@ -210,6 +217,8 @@ function QuizSection() {
     } catch (err) {
       console.error("Failed to submit quiz answer:", err);
       setError("Could not save your answer. Check the console.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -331,8 +340,13 @@ function QuizSection() {
           type="button"
           className="quiz-primary"
           onClick={handleNext}
+          disabled={isSubmitting}
         >
-          {index === QUESTIONS.length - 1 ? "Finish" : "Next"}
+          {isSubmitting
+            ? "Saving..."
+            : index === QUESTIONS.length - 1
+              ? "Finish"
+              : "Next"}
         </button>
       </div>
     </div>

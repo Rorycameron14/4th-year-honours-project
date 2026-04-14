@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Herosection.css';
 
 function HeroSection() {
@@ -14,17 +15,20 @@ function HeroSection() {
 
       <div className="hero-content">
         <h1>FOCUSED</h1>
-        <p>Get focusing, stay focused.</p>
+        <p>
+          An immersive learning project exploring how background audio
+          conditions may affect concentration, engagement, and quiz
+          performance.
+        </p>
 
         <div className="hero-btns">
-          <button className="btn btn-primary">
+          <Link to="/lesson" className="btn btn-primary">
             Get Started
-          </button>
+          </Link>
 
-          <button className="btn btn-outline">
-            <span className="btn-icon">▶</span>
-            Watch Trailer
-          </button>
+          <Link to="/about" className="btn btn-outline">
+            Learn More
+          </Link>
         </div>
       </div>
     </div>

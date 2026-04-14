@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import { Button } from './Button';
 import { Link } from 'react-router-dom';
 
 function Footer() {
@@ -8,107 +7,86 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          Join the Adventure newsletter to receive our best vacation deals
+          FOCUSED is an immersive dissertation project investigating how
+          different background audio conditions may influence learning and
+          concentration.
         </p>
         <p className='footer-subscription-text'>
-          You can unsubscribe at any time.
+          Use the links below to move through the lesson, quiz, and project
+          information pages.
         </p>
-        <div className='input-areas'>
-          <form>
-            <input
-              className='footer-input'
-              name='email'
-              type='email'
-              placeholder='Your Email'
-            />
-            <Button buttonStyle='btn--outline'>Subscribe</Button>
-          </form>
+        <div className='footer-cta-group'>
+          <Link to='/lesson' className='footer-cta'>
+            Start Lesson
+          </Link>
+          <Link to='/about' className='footer-cta footer-cta--secondary'>
+            Project Background
+          </Link>
         </div>
       </section>
+
       <div className='footer-links'>
         <div className='footer-link-wrapper'>
-          <div class='footer-link-items'>
-            <h2>About Us</h2>
-            <Link to='/sign-up'>How it works</Link>
-            <Link to='/'>Testimonials</Link>
-            <Link to='/'>Careers</Link>
-            <Link to='/'>Investors</Link>
-            <Link to='/'>Terms of Service</Link>
+          <div className='footer-link-items'>
+            <h2>Project</h2>
+            <Link to='/about'>About the Study</Link>
+            <Link to='/lesson'>Immersive Lesson</Link>
+            <Link to='/quiz'>Quiz</Link>
+            <Link to='/enquire'>Enquire</Link>
           </div>
-          <div class='footer-link-items'>
-            <h2>Contact Us</h2>
-            <Link to='/'>Contact</Link>
-            <Link to='/'>Support</Link>
-            <Link to='/'>Destinations</Link>
-            <Link to='/'>Sponsorships</Link>
+          <div className='footer-link-items'>
+            <h2>Learning Flow</h2>
+            <Link to='/'>Home</Link>
+            <Link to='/lesson'>Start Lesson</Link>
+            <Link to='/quiz'>Complete Quiz</Link>
+            <Link to='/about'>Read More</Link>
           </div>
         </div>
+
         <div className='footer-link-wrapper'>
-          <div class='footer-link-items'>
-            <h2>Videos</h2>
-            <Link to='/'>Submit Video</Link>
-            <Link to='/'>Ambassadors</Link>
-            <Link to='/'>Agency</Link>
-            <Link to='/'>Influencer</Link>
+          <div className='footer-link-items'>
+            <h2>Research Focus</h2>
+            <Link to='/about'>Audio Conditions</Link>
+            <Link to='/about'>ADHD and Dyslexia Context</Link>
+            <Link to='/about'>Immersive Environment</Link>
+            <Link to='/about'>Data Collection</Link>
           </div>
-          <div class='footer-link-items'>
-            <h2>Social Media</h2>
-            <Link to='/'>Instagram</Link>
-            <Link to='/'>Facebook</Link>
-            <Link to='/'>Youtube</Link>
-            <Link to='/'>Twitter</Link>
+          <div className='footer-link-items'>
+            <h2>Site Links</h2>
+            <Link to='/'>Home</Link>
+            <Link to='/about'>About</Link>
+            <Link to='/lesson'>Lesson</Link>
+            <Link to='/quiz'>Quiz</Link>
           </div>
         </div>
       </div>
-      <section class='social-media'>
-        <div class='social-media-wrap'>
-          <div class='footer-logo'>
+
+      <section className='social-media'>
+        <div className='social-media-wrap'>
+          <div className='footer-logo'>
             <Link to='/' className='social-logo'>
               FOCUSED
-              <i class='fab fa-typo3' />
             </Link>
           </div>
-          <small class='website-rights'>FOCUSED</small>
-          <div class='social-icons'>
-            <Link
-              class='social-icon-link facebook'
-              to='/'
-              target='_blank'
-              aria-label='Facebook'
-            >
-              <i class='fab fa-facebook-f' />
+          <small className='website-rights'>
+            FOCUSED | Immersive Learning Dissertation Project
+          </small>
+          <div className='social-icons'>
+            <Link className='social-icon-link' to='/lesson' aria-label='Lesson'>
+              Lesson
+            </Link>
+            <Link className='social-icon-link' to='/quiz' aria-label='Quiz'>
+              Quiz
+            </Link>
+            <Link className='social-icon-link' to='/about' aria-label='About'>
+              About
             </Link>
             <Link
-              class='social-icon-link instagram'
-              to='/'
-              target='_blank'
-              aria-label='Instagram'
+              className='social-icon-link'
+              to='/enquire'
+              aria-label='Enquire'
             >
-              <i class='fab fa-instagram' />
-            </Link>
-            <Link
-              class='social-icon-link youtube'
-              to='/'
-              target='_blank'
-              aria-label='Youtube'
-            >
-              <i class='fab fa-youtube' />
-            </Link>
-            <Link
-              class='social-icon-link twitter'
-              to='/'
-              target='_blank'
-              aria-label='Twitter'
-            >
-              <i class='fab fa-twitter' />
-            </Link>
-            <Link
-              class='social-icon-link twitter'
-              to='/'
-              target='_blank'
-              aria-label='LinkedIn'
-            >
-              <i class='fab fa-linkedin' />
+              Enquire
             </Link>
           </div>
         </div>

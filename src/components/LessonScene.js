@@ -175,6 +175,19 @@ function LessonScene() {
     };
   }, []);
 
+  useEffect(() => {
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+    };
+  }, []);
+
   const handleStart = async () => {
     if (sessionId) {
       localStorage.setItem('audioCondition', selectedSound);
@@ -276,7 +289,11 @@ function LessonScene() {
                   'hotspot' +
                   (active?.wallId === wall.id && active?.hotspot?.id === hotspot.id
                     ? ' hotspot--active'
-                    : '')
+                    : '') +
+                  (hotspot.x <= 18 ? ' hotspot--edge-left' : '') +
+                  (hotspot.x >= 82 ? ' hotspot--edge-right' : '') +
+                  (hotspot.y <= 22 ? ' hotspot--edge-top' : '') +
+                  (hotspot.y >= 78 ? ' hotspot--edge-bottom' : '')
                 }
                 style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
                 onPointerDown={async (e) => {
@@ -302,7 +319,13 @@ function LessonScene() {
 
             {active?.wallId === wall.id && active?.hotspot && (
               <div
-                className="hotspot-popup"
+                className={
+                  'hotspot-popup' +
+                  (active.hotspot.x <= 18 ? ' hotspot-popup--align-left' : '') +
+                  (active.hotspot.x >= 82 ? ' hotspot-popup--align-right' : '') +
+                  (active.hotspot.y <= 22 ? ' hotspot-popup--below' : '') +
+                  (active.hotspot.y >= 78 ? ' hotspot-popup--raised' : '')
+                }
                 style={{
                   left: `${active.hotspot.x}%`,
                   top: `${active.hotspot.y}%`,
