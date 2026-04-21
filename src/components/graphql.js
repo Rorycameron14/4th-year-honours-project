@@ -1,7 +1,11 @@
 function normaliseGraphqlUrl(rawUrl) {
   if (!rawUrl) return rawUrl;
 
-  return rawUrl.endsWith('/graphql') ? rawUrl : `${rawUrl}/graphql`;
+  const trimmedUrl = rawUrl.replace(/\/+$/, '');
+
+  return trimmedUrl.endsWith('/graphql')
+    ? trimmedUrl
+    : `${trimmedUrl}/graphql`;
 }
 
 const GRAPHQL_URL = normaliseGraphqlUrl(
