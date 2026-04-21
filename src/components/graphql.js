@@ -1,4 +1,8 @@
-const GRAPHQL_URL = 'https://graphqlserver-nkjy.onrender.com/graphql';
+const GRAPHQL_URL =
+  process.env.REACT_APP_GRAPHQL_URL ||
+  (window.location.hostname === 'localhost'
+    ? 'http://localhost:4000/graphql'
+    : 'https://graphqlserver-nkjy.onrender.com/graphql');
 
 // All lesson and quiz logging goes through one helper so the request shape stays consistent.
 async function gqlRequest(query, variables = {}) {

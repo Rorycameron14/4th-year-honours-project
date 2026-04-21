@@ -81,6 +81,15 @@
       "createdAt": "2026-03-24T16:29:25.317Z",
       "endedAt": "2026-03-24T16:29:59.116Z",
       "score": 3
+    },
+    {
+      "id": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "participantCode": "1",
+      "group": "ADHD",
+      "audioCondition": "silence",
+      "createdAt": "2026-04-21T21:58:33.367Z",
+      "endedAt": "2026-04-21T21:58:53.479Z",
+      "score": 2
     }
   ],
   "events": [
@@ -167,6 +176,34 @@
       "sceneId": "right",
       "hotspotId": "priests",
       "createdAt": "2026-03-24T16:29:34.112Z"
+    },
+    {
+      "id": "2b5ffefe-60ed-4c96-adf0-bec0fce8271d",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-21T21:58:34.215Z"
+    },
+    {
+      "id": "b8103299-66e8-4eda-aa84-31eda07feca1",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-21T21:58:34.970Z"
+    },
+    {
+      "id": "374c37ff-da2d-4a65-acc7-e6092bb2345b",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-21T21:58:39.332Z"
+    },
+    {
+      "id": "a4238ffb-bc56-4fea-9399-ef7b7f056ad3",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "sceneId": "center",
+      "hotspotId": "flooding",
+      "createdAt": "2026-04-21T21:58:40.499Z"
     }
   ],
   "answers": [
@@ -367,6 +404,69 @@
       "isCorrect": false,
       "responseTimeMs": 1051,
       "createdAt": "2026-03-24T16:29:59.112Z"
+    },
+    {
+      "id": "b8cbb0e6-e7f8-4e14-9695-bad4f3690952",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q1_nile_civilisation",
+      "selectedIndex": 0,
+      "isCorrect": false,
+      "responseTimeMs": 4672,
+      "createdAt": "2026-04-21T21:58:45.853Z"
+    },
+    {
+      "id": "60c8a0ea-d124-4ed7-866b-4220ac4a002d",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q2_pyramid_workers",
+      "selectedIndex": 0,
+      "isCorrect": true,
+      "responseTimeMs": 1232,
+      "createdAt": "2026-04-21T21:58:47.090Z"
+    },
+    {
+      "id": "f014763c-d241-43a2-afa7-48e62ccc9c58",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q3_nile_flooding",
+      "selectedIndex": 0,
+      "isCorrect": false,
+      "responseTimeMs": 1193,
+      "createdAt": "2026-04-21T21:58:48.290Z"
+    },
+    {
+      "id": "ed653b66-a450-4fb1-813b-ba2f05c55272",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q4_great_pyramid_power",
+      "selectedIndex": 0,
+      "isCorrect": false,
+      "responseTimeMs": 1250,
+      "createdAt": "2026-04-21T21:58:49.547Z"
+    },
+    {
+      "id": "b77be82f-081a-4a3f-a67c-c05a68e51b56",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q5_temples_society",
+      "selectedIndex": 0,
+      "isCorrect": false,
+      "responseTimeMs": 1057,
+      "createdAt": "2026-04-21T21:58:50.619Z"
+    },
+    {
+      "id": "3474116b-324f-4eee-a424-4cdf4e50e0dd",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q6_papyrus",
+      "selectedIndex": 0,
+      "isCorrect": false,
+      "responseTimeMs": 1748,
+      "createdAt": "2026-04-21T21:58:52.377Z"
+    },
+    {
+      "id": "be858d50-e3fa-496b-9a26-d72a5178c156",
+      "sessionId": "025a6eb6-c92f-4f64-87ee-c81f0e88a32b",
+      "questionId": "q7_desert_location",
+      "selectedIndex": 0,
+      "isCorrect": true,
+      "responseTimeMs": 1091,
+      "createdAt": "2026-04-21T21:58:53.473Z"
     }
   ]
 }

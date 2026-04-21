@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { submitAnswer, endSession, updateSessionDetails } from './graphql';
+import {
+  submitAnswer,
+  endSession,
+  updateSessionDetails,
+  startSession,
+} from './graphql';
 import './QuizSection.css';
 
 const QUESTIONS = [
@@ -129,6 +134,13 @@ function QuizSection() {
     setSelected(null);
   }, [index]);
 
+  const storeParticipantDetails = (nextSessionId) => {
+    localStorage.setItem('sessionId', nextSessionId);
+    localStorage.setItem('participantCode', participantCode);
+    localStorage.setItem('group', group);
+    localStorage.setItem('audioCondition', audioCondition);
+  };
+
   const handleSaveDetails = async () => {
     if (!sessionId) {
       setError('No active session found. Please start the lesson first.');
@@ -159,15 +171,32 @@ function QuizSection() {
         audioCondition
       );
 
-      localStorage.setItem('participantCode', participantCode);
-      localStorage.setItem('group', group);
-      localStorage.setItem('audioCondition', audioCondition);
-
+      storeParticipantDetails(sessionId);
       setDetailsSaved(true);
       setError('');
     } catch (err) {
       console.error('Failed to save participant details:', err);
-      setError('Could not save participant details. Check the console.');
+
+      if (err.message === 'Session not found') {
+        try {
+          // If an old session ID is still in localStorage, create a fresh session so the participant can continue.
+          const session = await startSession(
+            participantCode,
+            group,
+            audioCondition
+          );
+
+          setSessionId(session.id);
+          storeParticipantDetails(session.id);
+          setDetailsSaved(true);
+          setError('');
+          return;
+        } catch (retryErr) {
+          console.error('Failed to create a new session:', retryErr);
+        }
+      }
+
+      setError('Could not save participant details. Please restart the lesson.');
     }
   };
 
