@@ -1,8 +1,15 @@
-const GRAPHQL_URL =
+function normaliseGraphqlUrl(rawUrl) {
+  if (!rawUrl) return rawUrl;
+
+  return rawUrl.endsWith('/graphql') ? rawUrl : `${rawUrl}/graphql`;
+}
+
+const GRAPHQL_URL = normaliseGraphqlUrl(
   process.env.REACT_APP_GRAPHQL_URL ||
-  (window.location.hostname === 'localhost'
-    ? 'http://localhost:4000/graphql'
-    : 'https://graphqlserver-nkjy.onrender.com/graphql');
+    (window.location.hostname === 'localhost'
+      ? 'http://localhost:4000'
+      : 'https://graphqlserver-nkjy.onrender.com')
+);
 
 // All lesson and quiz logging goes through one helper so the request shape stays consistent.
 async function gqlRequest(query, variables = {}) {
@@ -14,7 +21,16 @@ async function gqlRequest(query, variables = {}) {
     body: JSON.stringify({ query, variables }),
   });
 
-  const json = await res.json();
+  const text = await res.text();
+  let json;
+
+  try {
+    json = JSON.parse(text);
+  } catch {
+    throw new Error(
+      `GraphQL endpoint returned non-JSON response (${res.status}). Check that the deployed URL points to /graphql.`
+    );
+  }
 
   if (json.errors) {
     console.error(json.errors);
