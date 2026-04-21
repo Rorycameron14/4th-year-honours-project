@@ -2,6 +2,7 @@ import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 
+// The card grid follows the reusable homepage pattern shown in the Brian Design tutorial, with project-specific text and routes.
 function Cards() {
   return (
     <div className='cards'>

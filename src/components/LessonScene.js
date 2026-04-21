@@ -14,7 +14,8 @@ const walls = [
         y: 60,
         title: 'The Great Sphinx',
         text: 'The Sphinx has the body of a lion and the head of a person. It was carved from a single piece of rock over 4,000 years ago.',
-        funFact: 'The face may represent a pharaoh, but no one is completely sure which one.',
+        funFact:
+          'The face may represent a pharaoh, but no one is completely sure which one.',
       },
       {
         id: 'great-pyramid',
@@ -22,7 +23,8 @@ const walls = [
         y: 28,
         title: 'The Great Pyramid',
         text: 'The Great Pyramid is one of the largest stone buildings ever made. It was a tomb for the pharaoh Khufu.',
-        funFact: 'For over 3,800 years, it was the tallest man-made structure in the world.',
+        funFact:
+          'For over 3,800 years, it was the tallest man-made structure in the world.',
       },
       {
         id: 'workers',
@@ -30,7 +32,8 @@ const walls = [
         y: 72,
         title: 'Workers and Builders',
         text: 'Thousands of workers helped build pyramids. Many were skilled labourers who worked in teams and were given food and shelter.',
-        funFact: 'Evidence suggests many workers were not slaves but paid and organised by the state.',
+        funFact:
+          'Evidence suggests many workers were not slaves but paid and organised by the state.',
       },
       {
         id: 'desert-edge',
@@ -38,7 +41,8 @@ const walls = [
         y: 86,
         title: 'Desert Edge',
         text: 'The pyramids sit at the edge of the Sahara Desert. The dry desert helped preserve stone structures for thousands of years.',
-        funFact: 'Desert temperatures can be very hot in the day and surprisingly cold at night.',
+        funFact:
+          'Desert temperatures can be very hot in the day and surprisingly cold at night.',
       },
     ],
   },
@@ -52,8 +56,9 @@ const walls = [
         x: 25,
         y: 72,
         title: 'Farming by the Nile',
-        text: 'The Nile’s floods left rich mud on the land. Farmers used it to grow crops like wheat, barley, and vegetables.',
-        funFact: 'If floods were too small or too big, it could cause hunger or damage fields.',
+        text: "The Nile's floods left rich mud on the land. Farmers used it to grow crops like wheat, barley, and vegetables.",
+        funFact:
+          'If floods were too small or too big, it could cause hunger or damage fields.',
       },
       {
         id: 'boats',
@@ -61,7 +66,8 @@ const walls = [
         y: 70,
         title: 'Boats and Transport',
         text: 'Boats travelled up and down the Nile carrying people and goods. The river was like a busy motorway.',
-        funFact: 'Some boats were made from reeds, while larger ones were built from wood with sails.',
+        funFact:
+          'Some boats were made from reeds, while larger ones were built from wood with sails.',
       },
       {
         id: 'wildlife',
@@ -69,7 +75,8 @@ const walls = [
         y: 78,
         title: 'Animals and Wildlife',
         text: 'The Nile supported lots of wildlife. People fished, hunted birds, and used plants like papyrus to make everyday items.',
-        funFact: 'Papyrus was used to make paper-like sheets for writing and record keeping.',
+        funFact:
+          'Papyrus was used to make paper-like sheets for writing and record keeping.',
       },
       {
         id: 'flooding',
@@ -77,7 +84,8 @@ const walls = [
         y: 55,
         title: 'Yearly Flooding',
         text: 'Each year the Nile flooded and then retreated. This cycle shaped the calendar and helped decide when to plant and harvest crops.',
-        funFact: 'Ancient Egyptians measured flood levels to predict good or bad harvests.',
+        funFact:
+          'Ancient Egyptians measured flood levels to predict good or bad harvests.',
       },
     ],
   },
@@ -92,7 +100,8 @@ const walls = [
         y: 60,
         title: 'Statues of the Gods',
         text: 'Temples contained statues of gods. Priests performed rituals to care for them.',
-        funFact: 'Egyptians believed statues could be a home for a god’s spirit when visiting the temple.',
+        funFact:
+          "Egyptians believed statues could be a home for a god's spirit when visiting the temple.",
       },
       {
         id: 'wall-paintings',
@@ -100,7 +109,8 @@ const walls = [
         y: 35,
         title: 'Wall Paintings',
         text: 'Temple walls were covered with symbols and pictures showing stories of gods and pharaohs.',
-        funFact: 'Colours were made from ground minerals mixed with binders like plant gum or egg.',
+        funFact:
+          'Colours were made from ground minerals mixed with binders like plant gum or egg.',
       },
       {
         id: 'offerings',
@@ -129,6 +139,7 @@ const SOUND_OPTIONS = {
 };
 
 function LessonScene() {
+  // Session and audio condition are restored so the participant can continue if they refresh or return to the page.
   const storedSessionId = localStorage.getItem('sessionId') || '';
   const storedAudioCondition =
     localStorage.getItem('audioCondition') || 'silence';
@@ -147,6 +158,7 @@ function LessonScene() {
     const audio = audioRef.current;
     if (!audio) return;
 
+    // The lesson content stays the same across conditions; only the chosen background audio changes.
     if (!hasStarted || selectedSound === 'silence') {
       audio.pause();
       audio.removeAttribute('src');
@@ -176,6 +188,7 @@ function LessonScene() {
   }, []);
 
   useEffect(() => {
+    // Lock scrolling while the immersive layout is active so the three-panel scene fills the viewport cleanly.
     const previousHtmlOverflow = document.documentElement.style.overflow;
     const previousBodyOverflow = document.body.style.overflow;
 
@@ -197,11 +210,8 @@ function LessonScene() {
     }
 
     try {
-      const session = await startSession(
-        '',
-        '',
-        selectedSound
-      );
+      // A session starts as soon as the lesson begins so hotspot interactions can be tied to the same participant run.
+      const session = await startSession('', '', selectedSound);
 
       setSessionId(session.id);
       localStorage.setItem('sessionId', session.id);
@@ -302,6 +312,7 @@ function LessonScene() {
                   setActive({ wallId: wall.id, hotspot });
 
                   try {
+                    // Hotspot clicks are logged immediately so the lesson can be analysed without waiting for the quiz stage.
                     const currentSessionId =
                       sessionId || localStorage.getItem('sessionId');
 
@@ -340,7 +351,7 @@ function LessonScene() {
                     closePopup();
                   }}
                 >
-                  ✕
+                  x
                 </button>
 
                 <div className="popup-title">{active.hotspot.title}</div>

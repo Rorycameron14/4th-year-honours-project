@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
 
+// Footer layout originally took inspiration from Brian Design's React website tutorial, then adapted for the dissertation site content and links.
 function Footer() {
   return (
     <div className='footer-container'>

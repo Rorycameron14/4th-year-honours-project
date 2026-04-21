@@ -6,14 +6,16 @@ import fs from "fs/promises";
 import { randomUUID } from "crypto";
 
 const PORT = process.env.PORT || 4000;
+// db.json is the prototype's lightweight datastore for saved sessions, hotspot events, and quiz answers.
 const DB_FILE = new URL("./db.json", import.meta.url);
 
-// ---- tiny file DB ----
+// Tiny file DB
 async function readDB() {
   try {
     const raw = await fs.readFile(DB_FILE, "utf-8");
     return JSON.parse(raw);
   } catch {
+    // The prototype starts with empty collections if the file does not exist or cannot be read yet.
     return { sessions: [], events: [], answers: [] };
   }
 }
@@ -22,10 +24,11 @@ async function writeDB(db) {
   await fs.writeFile(DB_FILE, JSON.stringify(db, null, 2), "utf-8");
 }
 
-// ---- csv helper ----
+// CSV helper
 function toCSV(rows) {
   if (!rows.length) return "";
 
+  // CSV export is used for later analysis, so values are escaped rather than assuming plain text only.
   const headers = Object.keys(rows[0]);
 
   const escape = (value) => {
@@ -42,7 +45,7 @@ function toCSV(rows) {
   return lines.join("\n");
 }
 
-// ---- schema ----
+// Schema
 const typeDefs = `#graphql
   type Query {
     health: String!
@@ -88,7 +91,7 @@ const typeDefs = `#graphql
   }
 `;
 
-// ---- resolvers ----
+// Resolvers
 const resolvers = {
   Query: {
     health: () => "ok",
@@ -109,6 +112,7 @@ const resolvers = {
   Mutation: {
     startSession: async (_, { participantCode, group, audioCondition }) => {
       const db = await readDB();
+      // A session is created before the quiz so lesson interactions can still be logged.
       const session = {
         id: randomUUID(),
         participantCode,
@@ -131,6 +135,7 @@ const resolvers = {
       const session = db.sessions.find((s) => s.id === sessionId);
       if (!session) throw new Error("Session not found");
 
+      // Participant details are updated later because they are confirmed on the quiz screen.
       session.participantCode = participantCode;
       session.group = group;
       session.audioCondition = audioCondition;
@@ -186,7 +191,7 @@ const resolvers = {
   },
 };
 
-// ---- start server ----
+// Start server
 async function start() {
   const app = express();
   app.use(cors({ origin: "*" }));
@@ -223,6 +228,7 @@ async function start() {
   const apollo = new ApolloServer({ typeDefs, resolvers });
   await apollo.start();
 
+  // GraphQL handles logging operations, while the plain routes above are kept for easy CSV export.
   app.use("/graphql", expressMiddleware(apollo));
 
   app.listen(PORT, () => {

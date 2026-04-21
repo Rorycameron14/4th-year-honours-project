@@ -1,99 +1,99 @@
-import React, { useEffect, useRef, useState } from "react";
-import { submitAnswer, endSession, updateSessionDetails } from "./graphql";
-import "./QuizSection.css";
+import React, { useEffect, useRef, useState } from 'react';
+import { submitAnswer, endSession, updateSessionDetails } from './graphql';
+import './QuizSection.css';
 
 const QUESTIONS = [
   {
-    id: "q1_nile_civilisation",
+    id: 'q1_nile_civilisation',
     question:
-      "Which explanation best shows why the River Nile was central to the development of Ancient Egyptian civilisation?",
+      'Which explanation best shows why the River Nile was central to the development of Ancient Egyptian civilisation?',
     options: [
-      "It prevented any form of drought or food shortage from taking place",
-      "It supplied all the stone needed to build pyramids and temples",
-      "It created fertile land, supported agriculture, and acted as a major transport route",
-      "It provided a natural barrier that completely isolated Egypt from all outside influence",
+      'It prevented any form of drought or food shortage from taking place',
+      'It supplied all the stone needed to build pyramids and temples',
+      'It created fertile land, supported agriculture, and acted as a major transport route',
+      'It provided a natural barrier that completely isolated Egypt from all outside influence',
     ],
     correctIndex: 2,
   },
   {
-    id: "q2_pyramid_workers",
+    id: 'q2_pyramid_workers',
     question:
-      "What does the evidence presented in the lesson suggest about the workers who built the pyramids?",
+      'What does the evidence presented in the lesson suggest about the workers who built the pyramids?',
     options: [
-      "They were often organised labourers who worked in teams and received support such as food and shelter",
-      "They were foreign soldiers sent to Egypt by neighbouring kingdoms",
-      "They were mainly enslaved people forced to work without organisation",
-      "They were untrained villagers who worked only in emergency situations",
+      'They were often organised labourers who worked in teams and received support such as food and shelter',
+      'They were foreign soldiers sent to Egypt by neighbouring kingdoms',
+      'They were mainly enslaved people forced to work without organisation',
+      'They were untrained villagers who worked only in emergency situations',
     ],
     correctIndex: 0,
   },
   {
-    id: "q3_nile_flooding",
+    id: 'q3_nile_flooding',
     question:
-      "Which statement best explains why the yearly flooding of the Nile was important to farming?",
+      'Which statement best explains why the yearly flooding of the Nile was important to farming?',
     options: [
-      "It stopped wild animals from approaching farmland",
-      "It made the desert permanently cooler and easier to live in",
-      "It deposited nutrient-rich soil that helped crops to grow",
-      "It allowed farmers to avoid using tools during harvest",
+      'It stopped wild animals from approaching farmland',
+      'It made the desert permanently cooler and easier to live in',
+      'It deposited nutrient-rich soil that helped crops to grow',
+      'It allowed farmers to avoid using tools during harvest',
     ],
     correctIndex: 2,
   },
   {
-    id: "q4_great_pyramid_power",
+    id: 'q4_great_pyramid_power',
     question:
-      "Why can the Great Pyramid be seen as evidence of both engineering skill and political power?",
+      'Why can the Great Pyramid be seen as evidence of both engineering skill and political power?',
     options: [
-      "It shows that Egyptian society depended entirely on foreign architects",
-      "It demonstrates the ability to organise resources, labour, and planning on a very large scale",
-      "It proves that religion had no influence on Egyptian building projects",
-      "It was built mainly for decoration and had little social importance",
+      'It shows that Egyptian society depended entirely on foreign architects',
+      'It demonstrates the ability to organise resources, labour, and planning on a very large scale',
+      'It proves that religion had no influence on Egyptian building projects',
+      'It was built mainly for decoration and had little social importance',
     ],
     correctIndex: 1,
   },
   {
-    id: "q5_temples_society",
+    id: 'q5_temples_society',
     question:
-      "What does the role of temples in Ancient Egypt suggest about Egyptian society?",
+      'What does the role of temples in Ancient Egypt suggest about Egyptian society?',
     options: [
-      "Temples were mainly military buildings used to defend settlements",
-      "Priests had no organised duties beyond caring for statues",
-      "Religion and daily life were closely connected, and temples had both spiritual and local importance",
-      "Temples were used only for private prayer and had no wider function",
+      'Temples were mainly military buildings used to defend settlements',
+      'Priests had no organised duties beyond caring for statues',
+      'Religion and daily life were closely connected, and temples had both spiritual and local importance',
+      'Temples were used only for private prayer and had no wider function',
     ],
     correctIndex: 2,
   },
   {
-    id: "q6_papyrus",
+    id: 'q6_papyrus',
     question:
-      "Which conclusion can be drawn from the use of papyrus in Ancient Egypt?",
+      'Which conclusion can be drawn from the use of papyrus in Ancient Egypt?',
     options: [
-      "Writing was limited entirely to religious ceremonies",
-      "Egyptian society had no need for written communication",
-      "Papyrus was used mainly for building materials rather than communication",
-      "Record-keeping and administration were likely to have been important parts of daily life",
+      'Writing was limited entirely to religious ceremonies',
+      'Egyptian society had no need for written communication',
+      'Papyrus was used mainly for building materials rather than communication',
+      'Record-keeping and administration were likely to have been important parts of daily life',
     ],
     correctIndex: 3,
   },
   {
-    id: "q7_desert_location",
+    id: 'q7_desert_location',
     question:
-      "Why was the desert location of the pyramids historically significant?",
+      'Why was the desert location of the pyramids historically significant?',
     options: [
-      "The dry environment helped preserve structures for long periods of time",
-      "It reduced the need for workers during construction",
-      "It made them easier to hide from foreign enemies",
-      "It allowed builders to transport stone by boat more easily",
+      'The dry environment helped preserve structures for long periods of time',
+      'It reduced the need for workers during construction',
+      'It made them easier to hide from foreign enemies',
+      'It allowed builders to transport stone by boat more easily',
     ],
     correctIndex: 0,
   },
 ];
 
 function QuizSection() {
-  const [sessionId, setSessionId] = useState("");
-  const [participantCode, setParticipantCode] = useState("");
-  const [group, setGroup] = useState("");
-  const [audioCondition, setAudioCondition] = useState("");
+  const [sessionId, setSessionId] = useState('');
+  const [participantCode, setParticipantCode] = useState('');
+  const [group, setGroup] = useState('');
+  const [audioCondition, setAudioCondition] = useState('');
   const [detailsSaved, setDetailsSaved] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -101,17 +101,18 @@ function QuizSection() {
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const startedAtRef = useRef(Date.now());
 
   const current = QUESTIONS[index];
 
   useEffect(() => {
-    const savedSessionId = localStorage.getItem("sessionId") || "";
-    const savedParticipantCode = localStorage.getItem("participantCode") || "";
-    const savedGroup = localStorage.getItem("group") || "";
-    const savedAudioCondition = localStorage.getItem("audioCondition") || "";
+    // The quiz reuses the session created in the lesson so performance data and interaction data stay linked.
+    const savedSessionId = localStorage.getItem('sessionId') || '';
+    const savedParticipantCode = localStorage.getItem('participantCode') || '';
+    const savedGroup = localStorage.getItem('group') || '';
+    const savedAudioCondition = localStorage.getItem('audioCondition') || '';
 
     setSessionId(savedSessionId);
     setParticipantCode(savedParticipantCode);
@@ -123,32 +124,34 @@ function QuizSection() {
   }, []);
 
   useEffect(() => {
+    // Response time is measured per question, so the timer resets whenever the question index changes.
     startedAtRef.current = Date.now();
     setSelected(null);
   }, [index]);
 
   const handleSaveDetails = async () => {
     if (!sessionId) {
-      setError("No active session found. Please start the lesson first.");
+      setError('No active session found. Please start the lesson first.');
       return;
     }
 
     if (!participantCode.trim()) {
-      setError("Please enter a participant ID.");
+      setError('Please enter a participant ID.');
       return;
     }
 
     if (!group) {
-      setError("Please select a participant group.");
+      setError('Please select a participant group.');
       return;
     }
 
     if (!audioCondition) {
-      setError("Please select the sound used.");
+      setError('Please select the sound used.');
       return;
     }
 
     try {
+      // These details are stored once here so they can be reused in the completion screen and the exported data.
       await updateSessionDetails(
         sessionId,
         participantCode,
@@ -156,15 +159,15 @@ function QuizSection() {
         audioCondition
       );
 
-      localStorage.setItem("participantCode", participantCode);
-      localStorage.setItem("group", group);
-      localStorage.setItem("audioCondition", audioCondition);
+      localStorage.setItem('participantCode', participantCode);
+      localStorage.setItem('group', group);
+      localStorage.setItem('audioCondition', audioCondition);
 
       setDetailsSaved(true);
-      setError("");
+      setError('');
     } catch (err) {
-      console.error("Failed to save participant details:", err);
-      setError("Could not save participant details. Check the console.");
+      console.error('Failed to save participant details:', err);
+      setError('Could not save participant details. Check the console.');
     }
   };
 
@@ -174,12 +177,12 @@ function QuizSection() {
     }
 
     if (!sessionId) {
-      setError("No active session found. Please start the lesson first.");
+      setError('No active session found. Please start the lesson first.');
       return;
     }
 
     if (selected === null) {
-      setError("Please select an answer before continuing.");
+      setError('Please select an answer before continuing.');
       return;
     }
 
@@ -190,6 +193,7 @@ function QuizSection() {
       const isCorrect = selected === current.correctIndex;
       const newScore = score + (isCorrect ? 1 : 0);
 
+      // Logging each answer separately makes it possible to analyse both accuracy and timing afterwards.
       await submitAnswer(
         sessionId,
         current.id,
@@ -199,15 +203,16 @@ function QuizSection() {
       );
 
       setScore(newScore);
-      setError("");
+      setError('');
 
       if (index === QUESTIONS.length - 1) {
+        // The session is only closed after the final answer so the stored score reflects the completed quiz.
         await endSession(sessionId, newScore);
 
-        localStorage.removeItem("sessionId");
-        localStorage.removeItem("participantCode");
-        localStorage.removeItem("group");
-        localStorage.removeItem("audioCondition");
+        localStorage.removeItem('sessionId');
+        localStorage.removeItem('participantCode');
+        localStorage.removeItem('group');
+        localStorage.removeItem('audioCondition');
 
         setFinished(true);
         return;
@@ -215,8 +220,8 @@ function QuizSection() {
 
       setIndex(index + 1);
     } catch (err) {
-      console.error("Failed to submit quiz answer:", err);
-      setError("Could not save your answer. Check the console.");
+      console.error('Failed to submit quiz answer:', err);
+      setError('Could not save your answer. Check the console.');
     } finally {
       setIsSubmitting(false);
     }
@@ -293,7 +298,7 @@ function QuizSection() {
     return (
       <div className="quiz-wrap">
         <div className="quiz-card">
-          <h1 className="quiz-title">Done ✅</h1>
+          <h1 className="quiz-title">Done</h1>
           <p className="quiz-subtitle">
             Score: <strong>{score}</strong> / {QUESTIONS.length}
           </p>
@@ -325,7 +330,7 @@ function QuizSection() {
               key={i}
               type="button"
               className={
-                "quiz-option" + (selected === i ? " quiz-option--selected" : "")
+                'quiz-option' + (selected === i ? ' quiz-option--selected' : '')
               }
               onClick={() => setSelected(i)}
             >
@@ -343,10 +348,10 @@ function QuizSection() {
           disabled={isSubmitting}
         >
           {isSubmitting
-            ? "Saving..."
+            ? 'Saving...'
             : index === QUESTIONS.length - 1
-              ? "Finish"
-              : "Next"}
+              ? 'Finish'
+              : 'Next'}
         </button>
       </div>
     </div>

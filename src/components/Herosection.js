@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Herosection.css';
 
+// Hero section structure was based on the Brian Design tutorial homepage and then rewritten around the FOCUSED project.
 function HeroSection() {
   return (
     <div className="hero-container">

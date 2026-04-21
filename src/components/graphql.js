@@ -1,5 +1,6 @@
 const GRAPHQL_URL = 'https://graphqlserver-nkjy.onrender.com/graphql';
 
+// All lesson and quiz logging goes through one helper so the request shape stays consistent.
 async function gqlRequest(query, variables = {}) {
   const res = await fetch(GRAPHQL_URL, {
     method: 'POST',
@@ -63,6 +64,7 @@ export async function logHotspot(sessionId, sceneId, hotspotId) {
   return data.logHotspot;
 }
 
+// Each quiz answer is logged separately so response time and correctness can be analysed later.
 export async function submitAnswer(sessionId, questionId, selectedIndex, isCorrect, responseTimeMs) {
   const query = `
     mutation SubmitAnswer(
@@ -130,6 +132,7 @@ export async function checkHealth() {
   return data.health;
 }
 
+// Participant details are completed on the quiz page because the lesson can begin before those fields are entered.
 export async function updateSessionDetails(sessionId, participantCode, group, audioCondition) {
   const query = `
     mutation UpdateSessionDetails(

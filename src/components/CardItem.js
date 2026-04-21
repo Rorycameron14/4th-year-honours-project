@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// This reusable card item came from the same tutorial-inspired homepage pattern and is used to keep the card layout consistent.
 function CardItem(props) {
   return (
     <>
