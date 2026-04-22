@@ -3,7 +3,7 @@
 /* If your navbar is 80px tall */
 .immersive-wall {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr) minmax(0, 1fr);
   height: calc(100vh - 80px);
   width: 100%;
   overflow: hidden;
@@ -15,8 +15,13 @@
 .wall-panel {
   position: relative;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   border-right: 1px solid rgba(255, 255, 255, 0.10);
+  z-index: 1;
+}
+
+.wall-panel--active {
+  z-index: 12;
 }
 
 .wall-panel:last-child {
@@ -31,15 +36,16 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  z-index: 0;
 }
 
 /* Touch-friendly hotspots */
 .hotspot {
   position: absolute;
-  width: 72px;
-  height: 72px;
+  width: 46px;
+  height: 46px;
   border-radius: 999px;
-  border: 3px solid #1d4ed8;
+  border: 2px solid #1d4ed8;
   background: rgba(37, 99, 235, 0.16);
   transform: translate(-50%, -50%);
   display: flex;
@@ -75,8 +81,8 @@
 }
 
 .hotspot-dot {
-  width: 14px;
-  height: 14px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
   background: #60a5fa;
 }
@@ -89,83 +95,107 @@
 /* Pop-up */
 .hotspot-popup {
   position: absolute;
-  transform: translate(-50%, -115%);
-  width: min(460px, calc(100% - 32px));
+  transform: translate(-50%, -112%);
+  width: min(320px, calc(100% - 24px));
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(148, 163, 184, 0.35);
   border-radius: 18px;
-  padding: 20px 20px 18px 20px;
+  padding: 14px 14px 12px 14px;
   color: #e5e7eb;
-  z-index: 10;
+  z-index: 20;
   pointer-events: auto;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
 }
 
 .hotspot-popup--align-left {
-  transform: translate(-8%, -115%);
+  transform: translate(-4%, -112%);
 }
 
 .hotspot-popup--align-right {
-  transform: translate(-92%, -115%);
+  transform: translate(-96%, -112%);
+}
+
+.hotspot-popup--panel-left {
+  transform: translate(-6%, -112%);
+}
+
+.hotspot-popup--panel-right {
+  transform: translate(-94%, -112%);
 }
 
 .hotspot-popup--below {
-  transform: translate(-50%, 6%);
+  transform: translate(-50%, 10%);
 }
 
 .hotspot-popup--below.hotspot-popup--align-left {
-  transform: translate(-8%, 6%);
+  transform: translate(-4%, 10%);
 }
 
 .hotspot-popup--below.hotspot-popup--align-right {
-  transform: translate(-92%, 6%);
+  transform: translate(-96%, 10%);
 }
 
 .hotspot-popup--raised {
-  transform: translate(-50%, -108%);
+  transform: translate(-50%, -102%);
 }
 
 .hotspot-popup--raised.hotspot-popup--align-left {
-  transform: translate(-8%, -108%);
+  transform: translate(-4%, -102%);
 }
 
 .hotspot-popup--raised.hotspot-popup--align-right {
-  transform: translate(-92%, -108%);
+  transform: translate(-96%, -102%);
+}
+
+.hotspot-popup--panel-left.hotspot-popup--below {
+  transform: translate(-6%, 10%);
+}
+
+.hotspot-popup--panel-right.hotspot-popup--below {
+  transform: translate(-94%, 10%);
+}
+
+.hotspot-popup--panel-left.hotspot-popup--raised {
+  transform: translate(-6%, -102%);
+}
+
+.hotspot-popup--panel-right.hotspot-popup--raised {
+  transform: translate(-94%, -102%);
 }
 
 .popup-close {
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 6px;
+  right: 8px;
   background: transparent;
   border: none;
   color: rgba(229, 231, 235, 0.9);
-  font-size: 26px;
+  font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 4px 6px;
 }
 
 .popup-title {
   font-weight: 700;
-  font-size: 1.45rem;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  margin-bottom: 8px;
   color: #f9fafb;
-  padding-right: 38px;
+  padding-right: 22px;
 }
 
 .popup-text {
-  font-size: 1.15rem;
-  line-height: 1.65;
-  margin-bottom: 14px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
   opacity: 0.95;
 }
 
 .popup-fact {
-  font-size: 1.05rem;
-  line-height: 1.55;
-  padding-left: 14px;
-  border-left: 4px solid #60a5fa;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding-left: 10px;
+  border-left: 3px solid #60a5fa;
   opacity: 0.95;
 }
 
@@ -247,6 +277,39 @@
   cursor: pointer;
 }
 
+@media (min-width: 901px) and (max-width: 1280px) {
+  .immersive-wall {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr) minmax(0, 1fr);
+  }
+
+  .hotspot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hotspot-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .hotspot-popup {
+    width: min(280px, calc(100% - 20px));
+    padding: 12px 12px 10px 12px;
+  }
+
+  .popup-title {
+    font-size: 0.92rem;
+  }
+
+  .popup-text {
+    font-size: 0.8rem;
+  }
+
+  .popup-fact {
+    font-size: 0.76rem;
+  }
+}
+
 @media (max-width: 900px) {
   .immersive-wall {
     grid-template-columns: 1fr;
@@ -256,6 +319,7 @@
 
   .wall-panel {
     height: 60vh;
+    overflow: hidden;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   }
@@ -270,8 +334,8 @@
   }
 
   .hotspot {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
   }
 
   .hotspot-popup,
@@ -289,14 +353,14 @@
   }
 
   .popup-title {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .popup-text {
-    font-size: 1.02rem;
+    font-size: 0.9rem;
   }
 
   .popup-fact {
-    font-size: 0.98rem;
+    font-size: 0.82rem;
   }
 }

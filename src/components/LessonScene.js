@@ -286,7 +286,10 @@ function LessonScene() {
         {walls.map((wall) => (
           <div
             key={wall.id}
-            className={`wall-panel wall-panel--${wall.id}`}
+            className={
+              `wall-panel wall-panel--${wall.id}` +
+              (active?.wallId === wall.id ? ' wall-panel--active' : '')
+            }
             onPointerDown={(e) => e.stopPropagation()}
           >
             <img className="wall-image" src={wall.image} alt={wall.name} />
@@ -332,6 +335,8 @@ function LessonScene() {
               <div
                 className={
                   'hotspot-popup' +
+                  (wall.id === 'left' ? ' hotspot-popup--panel-left' : '') +
+                  (wall.id === 'right' ? ' hotspot-popup--panel-right' : '') +
                   (active.hotspot.x <= 18 ? ' hotspot-popup--align-left' : '') +
                   (active.hotspot.x >= 82 ? ' hotspot-popup--align-right' : '') +
                   (active.hotspot.y <= 22 ? ' hotspot-popup--below' : '') +

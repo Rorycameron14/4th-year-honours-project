@@ -1,71 +1,145 @@
-# Getting Started with Create React App
+# FOCUSED
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FOCUSED is a fourth-year dissertation project investigating how background audio conditions affect learning performance and concentration in an immersive multi-touch environment, with particular relevance to neurodivergent learners, especially those with ADHD and dyslexia.
 
-## Available Scripts
+The application presents an interactive Ancient Egypt lesson with hotspot-based exploration, followed by a seven-question quiz. A GraphQL logging backend records session data, hotspot interactions, quiz answers, response times, and final scores for later analysis.
 
-In the project directory, you can run:
+## Project Structure
 
-### `npm start`
+```text
+src/
+  App.js
+  index.js
+  App.css
+  components/
+    LessonScene.js
+    QuizSection.js
+    graphql.js
+    navbar.js
+    footer.js
+    Cards.js
+    CardItem.js
+    Herosection.js
+    pages/
+      Home.js
+      About.js
+      Lesson.js
+      Quiz.js
+      Enquire.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+server/
+  index.js
+  db.json
+  package.json
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Main Features
 
-### `npm test`
+- Three-panel immersive lesson scene based on Ancient Egypt
+- Interactive hotspots with educational content and short facts
+- Background audio conditions including silence, white noise, and themed audio
+- Quiz-based evaluation of learning performance
+- GraphQL logging for sessions, events, and answers
+- CSV export routes for later analysis
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technology Stack
 
-### `npm run build`
+- React
+- React Router
+- Express
+- Apollo Server
+- GraphQL
+- JSON file storage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the Project Locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The project uses two parts:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. the React frontend
+2. the Express and Apollo GraphQL backend
 
-### `npm run eject`
+### Frontend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+From the project root:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```powershell
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The frontend runs on:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```text
+http://localhost:3000
+```
 
-## Learn More
+### Backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+From the `server` folder:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```powershell
+cd server
+npm install
+npm start
+```
 
-### Code Splitting
+The backend runs on:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```text
+http://localhost:4000/graphql
+```
 
-### Analyzing the Bundle Size
+## GraphQL URL Behaviour
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The frontend logging helper in `src/components/graphql.js` switches automatically between local and deployed backends:
 
-### Making a Progressive Web App
+- on `localhost`, it uses `http://localhost:4000/graphql`
+- on the deployed site, it uses the Render backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This can also be overridden with:
 
-### Advanced Configuration
+```text
+REACT_APP_GRAPHQL_URL
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Data Storage
 
-### Deployment
+The backend stores logged data in:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```text
+server/db.json
+```
 
-### `npm run build` fails to minify
+This file contains three top-level collections:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# rory-dissertation" 
+- `sessions`
+- `events`
+- `answers`
+
+It is used as a lightweight datastore for the dissertation prototype.
+
+## Exporting Data
+
+The backend exposes CSV export routes for analysis:
+
+```text
+http://localhost:4000/export/sessions.csv
+http://localhost:4000/export/events.csv
+http://localhost:4000/export/answers.csv
+```
+
+These files can be used for later inspection, filtering, and visualisation.
+
+## Notes
+
+- The lesson and quiz logic are implemented in dedicated components rather than being split into many smaller modules.
+- The project is designed as a controlled educational prototype rather than a large production system.
+- The homepage layout and some reusable UI patterns were adapted from tutorial-style React website builds and then rewritten around the dissertation project content.
+
+## Dissertation Context
+
+This project explores the following research focus:
+
+How do different background audio conditions affect learning performance and concentration during an interactive task in an immersive multi-touch environment, particularly for neurodivergent learners?
+
+The system was built to support both delivery of the learning activity and collection of structured performance and interaction data for later evaluation.

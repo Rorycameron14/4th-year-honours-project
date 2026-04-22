@@ -90,6 +90,15 @@
       "createdAt": "2026-04-21T21:58:33.367Z",
       "endedAt": "2026-04-21T21:58:53.479Z",
       "score": 2
+    },
+    {
+      "id": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "participantCode": "1",
+      "group": "ADHD",
+      "audioCondition": "silence",
+      "createdAt": "2026-04-22T16:06:07.077Z",
+      "endedAt": null,
+      "score": null
     }
   ],
   "events": [
@@ -204,6 +213,398 @@
       "sceneId": "center",
       "hotspotId": "flooding",
       "createdAt": "2026-04-21T21:58:40.499Z"
+    },
+    {
+      "id": "faf118da-1712-49a6-a816-42e79a59e150",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "farming",
+      "createdAt": "2026-04-22T16:06:08.226Z"
+    },
+    {
+      "id": "5b4a68a1-ea63-473e-bd53-ffa7c7dba303",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "flooding",
+      "createdAt": "2026-04-22T16:06:09.441Z"
+    },
+    {
+      "id": "9378153c-97f9-40d9-a1e9-c0f65513670b",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "boats",
+      "createdAt": "2026-04-22T16:06:10.627Z"
+    },
+    {
+      "id": "b2e20353-70c1-4b91-a953-dcec82cb1142",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "wildlife",
+      "createdAt": "2026-04-22T16:06:11.266Z"
+    },
+    {
+      "id": "e9723374-24ba-47d3-98f4-ef068500e416",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:06:12.260Z"
+    },
+    {
+      "id": "a69d9663-ff61-4b83-88bf-5b03a90921c4",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:06:14.498Z"
+    },
+    {
+      "id": "b1fa0cd2-b2bd-4d17-b718-5c5e8b188370",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-22T16:06:15.976Z"
+    },
+    {
+      "id": "d03d445c-2edd-4cc0-a560-a4bee9aa7bf2",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-22T16:06:16.472Z"
+    },
+    {
+      "id": "1e19e413-ea5e-471a-930d-03c0afca798e",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "offerings",
+      "createdAt": "2026-04-22T16:06:17.698Z"
+    },
+    {
+      "id": "e967fc52-0af1-4103-949f-624b3751a2c8",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "wall-paintings",
+      "createdAt": "2026-04-22T16:06:18.769Z"
+    },
+    {
+      "id": "2ce6e6e2-efdc-4dd3-98ac-a4e4ca39b6f4",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "priests",
+      "createdAt": "2026-04-22T16:06:19.785Z"
+    },
+    {
+      "id": "beef5c4a-c2b3-46d7-8ac0-f1afe83190b2",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "statues",
+      "createdAt": "2026-04-22T16:06:20.418Z"
+    },
+    {
+      "id": "8bf2aa4e-9b76-47db-a77d-3b79ddcc099a",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "priests",
+      "createdAt": "2026-04-22T16:06:21.234Z"
+    },
+    {
+      "id": "47f3b5f4-e1cf-4d76-8b52-f9d62a0837b8",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:07:36.332Z"
+    },
+    {
+      "id": "ad0fe81f-c9a8-4133-b660-47dcae4e6cce",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:07:37.545Z"
+    },
+    {
+      "id": "92762d57-350a-41bc-92f3-e8c70e13b068",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-22T16:07:38.625Z"
+    },
+    {
+      "id": "4d7064f4-d7ed-4169-8398-b5c7085b4f43",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-22T16:07:39.163Z"
+    },
+    {
+      "id": "38a3485f-6921-47b9-af78-ab14c23a0725",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "farming",
+      "createdAt": "2026-04-22T16:07:40.209Z"
+    },
+    {
+      "id": "9568ac05-591b-4285-89c0-3c8878f0742a",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:07:47.452Z"
+    },
+    {
+      "id": "e503de33-5175-42a5-849b-a4238f29203a",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:07:48.136Z"
+    },
+    {
+      "id": "57616bfb-86d8-4de4-a46a-44b6c557d07a",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-22T16:07:49.250Z"
+    },
+    {
+      "id": "152cd250-47a4-40e5-8c41-7f157b093543",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-22T16:07:49.761Z"
+    },
+    {
+      "id": "4412a818-ab61-4ee8-899b-ae15f65b86ee",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "farming",
+      "createdAt": "2026-04-22T16:07:50.377Z"
+    },
+    {
+      "id": "3e61bdf9-0a48-4514-bb23-01b5cdd163dc",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "flooding",
+      "createdAt": "2026-04-22T16:07:51.209Z"
+    },
+    {
+      "id": "ee43fe9f-df01-457f-9ad8-2ef39a346eeb",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "boats",
+      "createdAt": "2026-04-22T16:07:51.978Z"
+    },
+    {
+      "id": "4c56c6c2-af7b-49e9-bc69-472190f36391",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "wildlife",
+      "createdAt": "2026-04-22T16:07:52.737Z"
+    },
+    {
+      "id": "f78f280a-18b3-4b72-b837-57a185e0354e",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "wall-paintings",
+      "createdAt": "2026-04-22T16:07:54.050Z"
+    },
+    {
+      "id": "f40b3a46-3314-4d02-89b7-4a1bd87b6d80",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "statues",
+      "createdAt": "2026-04-22T16:07:56.409Z"
+    },
+    {
+      "id": "a69630ac-e506-4fd2-8caa-ef1dcfc159d1",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "priests",
+      "createdAt": "2026-04-22T16:07:56.801Z"
+    },
+    {
+      "id": "b544e0a5-10e9-44c0-ad8c-d9966ffa843e",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "offerings",
+      "createdAt": "2026-04-22T16:07:57.241Z"
+    },
+    {
+      "id": "c5a1fbca-edbd-4c74-adc6-8189b2796a0b",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:07:59.145Z"
+    },
+    {
+      "id": "5ad27459-3612-4dcf-99c4-59212793ef11",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:08:03.633Z"
+    },
+    {
+      "id": "f668dd12-1482-4edf-92b0-751abc319ff5",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:09:20.533Z"
+    },
+    {
+      "id": "e36aad8b-a927-4300-98f7-52f5f748a738",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:09:21.977Z"
+    },
+    {
+      "id": "0c738de2-b6c6-4ef3-94a8-532efc451d91",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-22T16:09:23.363Z"
+    },
+    {
+      "id": "8580cdb6-fcff-4009-84f2-5cb52af08fc4",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-22T16:09:24.067Z"
+    },
+    {
+      "id": "0b553370-4242-4ced-b934-cf8da9efccec",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "farming",
+      "createdAt": "2026-04-22T16:09:25.098Z"
+    },
+    {
+      "id": "1bd67b65-520b-4601-8412-f4bcebcbab0e",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "flooding",
+      "createdAt": "2026-04-22T16:09:25.987Z"
+    },
+    {
+      "id": "894a254a-06a2-4dea-a742-3db08d34814b",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "wildlife",
+      "createdAt": "2026-04-22T16:09:26.459Z"
+    },
+    {
+      "id": "950d9418-7f90-4916-aab2-4b6d14b0ef75",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "boats",
+      "createdAt": "2026-04-22T16:09:26.993Z"
+    },
+    {
+      "id": "9e2d8f9e-53fc-4e28-a77e-a6db8d5013a3",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "offerings",
+      "createdAt": "2026-04-22T16:09:27.746Z"
+    },
+    {
+      "id": "d112b811-3785-4ccf-a2c8-ad0f8f121fed",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "wall-paintings",
+      "createdAt": "2026-04-22T16:09:29.091Z"
+    },
+    {
+      "id": "d142d87a-aba4-4ee1-89d0-aa76af011e36",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "statues",
+      "createdAt": "2026-04-22T16:09:30.146Z"
+    },
+    {
+      "id": "1a0e3436-f655-4b5b-85d1-6aa386721172",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "priests",
+      "createdAt": "2026-04-22T16:09:30.953Z"
+    },
+    {
+      "id": "4b4869b5-8a14-46d5-bbb4-1733edb56698",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:09:32.308Z"
+    },
+    {
+      "id": "eff98170-83dc-4f10-8463-baaa00c78a03",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:10:40.370Z"
+    },
+    {
+      "id": "439a8922-34ca-49d7-a07f-66b95f9b5f84",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-22T16:10:41.185Z"
+    },
+    {
+      "id": "919ea763-a31a-4cba-ad1b-1a20c237e686",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-22T16:10:41.730Z"
+    },
+    {
+      "id": "061d8c56-2cf4-4869-ad39-73ed7d4d16ff",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "farming",
+      "createdAt": "2026-04-22T16:10:42.817Z"
+    },
+    {
+      "id": "21f0aa1c-dd9f-41b9-9347-721146cb1515",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "flooding",
+      "createdAt": "2026-04-22T16:10:43.690Z"
+    },
+    {
+      "id": "d29670af-78de-460e-9c38-61330a7302ea",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "wildlife",
+      "createdAt": "2026-04-22T16:10:44.411Z"
+    },
+    {
+      "id": "dda216db-dc31-40f0-8566-c61085f22f56",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "boats",
+      "createdAt": "2026-04-22T16:10:45.659Z"
+    },
+    {
+      "id": "8a61b273-03cb-410e-99cc-f689f6389bde",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "wall-paintings",
+      "createdAt": "2026-04-22T16:10:46.762Z"
+    },
+    {
+      "id": "850063a2-26ed-491a-86db-20742e26b36f",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "statues",
+      "createdAt": "2026-04-22T16:10:47.770Z"
+    },
+    {
+      "id": "7d02c2e0-4be5-4bdf-b7b0-41520ac5bca6",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "priests",
+      "createdAt": "2026-04-22T16:10:48.754Z"
+    },
+    {
+      "id": "1298e6f2-9bdc-4523-a728-7e62db416f31",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "right",
+      "hotspotId": "offerings",
+      "createdAt": "2026-04-22T16:10:49.562Z"
     }
   ],
   "answers": [
