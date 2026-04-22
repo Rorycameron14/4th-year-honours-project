@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 4000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const LOCAL_DB_FILE = path.join(__dirname, "db.json");
+const RENDER_DB_FILE = "/var/data/db.json";
 
 function resolveDbFile() {
   if (process.env.DB_FILE_PATH) {
@@ -21,24 +22,36 @@ function resolveDbFile() {
     return path.join(process.env.DB_STORAGE_DIR, "db.json");
   }
 
-  // Render persistent disks are commonly mounted at /var/data.
-  if (process.env.RENDER) {
-    return "/var/data/db.json";
-  }
-
   return LOCAL_DB_FILE;
 }
 
 // db.json is the prototype's lightweight datastore for saved sessions, hotspot events, and quiz answers.
-const DB_FILE = resolveDbFile();
+let DB_FILE = resolveDbFile();
 
 async function ensureDbFile() {
-  const dbDirectory = path.dirname(DB_FILE);
-  await fs.mkdir(dbDirectory, { recursive: true });
-
   try {
+    const dbDirectory = path.dirname(DB_FILE);
+    await fs.mkdir(dbDirectory, { recursive: true });
     await fs.access(DB_FILE);
-  } catch {
+  } catch (error) {
+    // On Render, /var/data only works when a persistent disk is actually mounted.
+    if (
+      process.env.RENDER &&
+      !process.env.DB_FILE_PATH &&
+      !process.env.DB_STORAGE_DIR &&
+      DB_FILE === LOCAL_DB_FILE
+    ) {
+      try {
+        DB_FILE = RENDER_DB_FILE;
+        const renderDbDirectory = path.dirname(DB_FILE);
+        await fs.mkdir(renderDbDirectory, { recursive: true });
+        await fs.access(DB_FILE);
+        return;
+      } catch {
+        DB_FILE = LOCAL_DB_FILE;
+      }
+    }
+
     try {
       const bundledDb = await fs.readFile(LOCAL_DB_FILE, "utf-8");
       await fs.writeFile(DB_FILE, bundledDb, "utf-8");
