@@ -605,6 +605,62 @@
       "sceneId": "right",
       "hotspotId": "offerings",
       "createdAt": "2026-04-22T16:10:49.562Z"
+    },
+    {
+      "id": "d7c28f50-7804-48c7-82a3-ff0a67a4a1d9",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "great-pyramid",
+      "createdAt": "2026-04-22T16:32:49.103Z"
+    },
+    {
+      "id": "5d2580be-07a1-4ed6-83cd-90d869038b50",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "sphinx",
+      "createdAt": "2026-04-22T16:32:49.829Z"
+    },
+    {
+      "id": "57f91510-fad4-4cb1-8da7-202513a80e0d",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "workers",
+      "createdAt": "2026-04-22T16:32:50.750Z"
+    },
+    {
+      "id": "11d9b58f-23b3-473e-8393-3502c67342ae",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "left",
+      "hotspotId": "desert-edge",
+      "createdAt": "2026-04-22T16:32:51.942Z"
+    },
+    {
+      "id": "da494382-f899-49e0-9656-bd5ecfcf943c",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "farming",
+      "createdAt": "2026-04-22T16:32:52.508Z"
+    },
+    {
+      "id": "8b5f1f08-309f-4de6-9790-e2fe141ee6a0",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "flooding",
+      "createdAt": "2026-04-22T16:32:52.966Z"
+    },
+    {
+      "id": "aee2a60f-7b57-4b79-930f-644af1d18ac4",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "wildlife",
+      "createdAt": "2026-04-22T16:32:53.332Z"
+    },
+    {
+      "id": "bcbb9e09-8824-4fa0-8941-2f3e8e3e42b4",
+      "sessionId": "e14c3200-26ea-40dd-8b29-10883c3f9b1d",
+      "sceneId": "center",
+      "hotspotId": "boats",
+      "createdAt": "2026-04-22T16:32:53.918Z"
     }
   ],
   "answers": [

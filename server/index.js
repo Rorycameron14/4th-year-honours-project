@@ -4,10 +4,56 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import fs from "fs/promises";
 import { randomUUID } from "crypto";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const PORT = process.env.PORT || 4000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const LOCAL_DB_FILE = path.join(__dirname, "db.json");
+
+function resolveDbFile() {
+  if (process.env.DB_FILE_PATH) {
+    return process.env.DB_FILE_PATH;
+  }
+
+  if (process.env.DB_STORAGE_DIR) {
+    return path.join(process.env.DB_STORAGE_DIR, "db.json");
+  }
+
+  // Render persistent disks are commonly mounted at /var/data.
+  if (process.env.RENDER) {
+    return "/var/data/db.json";
+  }
+
+  return LOCAL_DB_FILE;
+}
+
 // db.json is the prototype's lightweight datastore for saved sessions, hotspot events, and quiz answers.
-const DB_FILE = new URL("./db.json", import.meta.url);
+const DB_FILE = resolveDbFile();
+
+async function ensureDbFile() {
+  const dbDirectory = path.dirname(DB_FILE);
+  await fs.mkdir(dbDirectory, { recursive: true });
+
+  try {
+    await fs.access(DB_FILE);
+  } catch {
+    try {
+      const bundledDb = await fs.readFile(LOCAL_DB_FILE, "utf-8");
+      await fs.writeFile(DB_FILE, bundledDb, "utf-8");
+    } catch {
+      const emptyDb = {
+        _comment:
+          "This file stores the prototype's logged session data, hotspot events, and quiz answers.",
+        sessions: [],
+        events: [],
+        answers: [],
+      };
+      await fs.writeFile(DB_FILE, JSON.stringify(emptyDb, null, 2), "utf-8");
+    }
+  }
+}
 
 // Tiny file DB
 async function readDB() {
@@ -193,6 +239,8 @@ const resolvers = {
 
 // Start server
 async function start() {
+  await ensureDbFile();
+
   const app = express();
   app.use(cors({ origin: "*" }));
   app.use(express.json());
@@ -233,6 +281,7 @@ async function start() {
 
   app.listen(PORT, () => {
     console.log(`GraphQL running on http://localhost:${PORT}/graphql`);
+    console.log(`Using datastore at ${DB_FILE}`);
   });
 }
 
