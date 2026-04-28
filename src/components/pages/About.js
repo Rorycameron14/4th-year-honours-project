@@ -71,6 +71,58 @@ export default function About() {
               </ul>
             </section>
 
+            <section className='info-page__card info-page__card--wide'>
+              <h2>Study data</h2>
+              <p>
+                The application records participant sessions, hotspot
+                interactions, quiz responses, response times, audio conditions,
+                and final scores. The combined dataset is available as an Excel
+                spreadsheet to support analysis of how background audio affected
+                learning performance and concentration during the interactive
+                lesson.
+              </p>
+              <a
+                className='info-page__download'
+                href='/data/combined_data.xlsx'
+                download
+              >
+                Download combined study data
+              </a>
+            </section>
+
+            <section className='info-page__card info-page__card--wide'>
+              <h2>Immersive room footage</h2>
+              <p>
+                These short clips show the physical immersive room environment
+                used to deliver the learning activity. They provide context for
+                the multi-display setup, room-scale presentation, and
+                interaction space discussed in the dissertation.
+              </p>
+              <div className='info-page__video-grid'>
+                <figure className='info-page__video-item'>
+                  <video controls preload='metadata'>
+                    <source src='/videos/immersive-room-1.mp4' type='video/mp4' />
+                    Your browser does not support this video.
+                  </video>
+                  <figcaption>Immersive room setup view 1</figcaption>
+                </figure>
+                <figure className='info-page__video-item'>
+                  <video controls preload='metadata'>
+                    <source src='/videos/immersive-room-2.mp4' type='video/mp4' />
+                    Your browser does not support this video.
+                  </video>
+                  <figcaption>Immersive room setup view 2</figcaption>
+                </figure>
+                <figure className='info-page__video-item'>
+                  <video controls preload='metadata'>
+                    <source src='/videos/immersive-room-3.mp4' type='video/mp4' />
+                    Your browser does not support this video.
+                  </video>
+                  <figcaption>Immersive room setup view 3</figcaption>
+                </figure>
+              </div>
+            </section>
+
             <section className='info-page__card'>
               <h2>Project objectives</h2>
               <ul className='info-page__list'>

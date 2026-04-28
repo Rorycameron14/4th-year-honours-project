@@ -3,7 +3,9 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './navbar.css';
 
-// The responsive navbar pattern was built with reference to Brian Design's React tutorial, then customised for this project.
+// The responsive navbar pattern was built with reference to Brian Design's React Website Tutorial,
+// then customised for this project.
+// Reference: https://github.com/briancodex/react-website-v1/tree/starter
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);

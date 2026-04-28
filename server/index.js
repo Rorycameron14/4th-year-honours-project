@@ -104,6 +104,12 @@ function toCSV(rows) {
   return lines.join("\n");
 }
 
+// GraphQL API references used while implementing the prototype backend:
+// - GraphQL Foundation. (n.d.). GraphQL documentation. https://graphql.org/learn/
+// - Apollo GraphQL. (n.d.). Apollo Server documentation. https://www.apollographql.com/docs/apollo-server/
+// - Apollo GraphQL. (n.d.). Apollo Client documentation. https://www.apollographql.com/docs/react/
+// - Meta Open Source. (n.d.). GraphQL: A query language for APIs. https://graphql.org/
+// These sources informed the use of schemas, resolvers, mutations, and Apollo's Express middleware.
 // Schema
 const typeDefs = `#graphql
   type Query {

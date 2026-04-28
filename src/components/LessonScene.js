@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './LessonScene.css';
 import { startSession, logHotspot } from './graphql';
 
+// Controls the immersive three-panel Ancient Egypt lesson and logs participant hotspot interactions.
 const walls = [
   {
     id: 'left',

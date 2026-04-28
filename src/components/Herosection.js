@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Herosection.css';
 
-// Hero section structure was based on the Brian Design tutorial homepage and then rewritten around the FOCUSED project.
+// Hero section structure was based on Brian Design's React Website Tutorial homepage,
+// then rewritten around the FOCUSED project.
+// Reference: https://github.com/briancodex/react-website-v1/tree/starter
 function HeroSection() {
   return (
     <div className="hero-container">

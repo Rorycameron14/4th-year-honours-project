@@ -7,6 +7,7 @@ import {
 } from './graphql';
 import './QuizSection.css';
 
+// Runs the post-lesson quiz and records participant performance data for dissertation analysis.
 const QUESTIONS = [
   {
     id: 'q1_nile_civilisation',

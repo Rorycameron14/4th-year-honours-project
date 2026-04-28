@@ -1,3 +1,4 @@
+// Centralises frontend GraphQL requests to the backend logging API.
 function normaliseGraphqlUrl(rawUrl) {
   if (!rawUrl) return rawUrl;
 
