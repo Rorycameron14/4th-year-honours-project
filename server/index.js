@@ -152,7 +152,7 @@ const typeDefs = `#graphql
     updateSessionDetails(sessionId: ID!, participantCode: String!, group: String!, audioCondition: String!): Session!
     logHotspot(sessionId: ID!, sceneId: String!, hotspotId: String!): Event!
     submitAnswer(sessionId: ID!, questionId: String!, selectedIndex: Int!, isCorrect: Boolean!, responseTimeMs: Int!): Answer!
-    endSession(sessionId: ID!, score: Int!): Session!
+    endSession(sessionId: ID!, score: Int!, participantCode: String, group: String, audioCondition: String): Session!
   }
 `;
 
@@ -242,10 +242,28 @@ const resolvers = {
       return answer;
     },
 
-    endSession: async (_, { sessionId, score }) => {
+    endSession: async (
+      _,
+      { sessionId, score, participantCode, group, audioCondition }
+    ) => {
       const db = await readDB();
-      const session = db.sessions.find((s) => s.id === sessionId);
-      if (!session) throw new Error("Session not found");
+      let session = db.sessions.find((s) => s.id === sessionId);
+
+      if (!session) {
+        // If localStorage still points at a session after db.json has been reset, recreate the session row
+        // so the already logged hotspot and quiz records remain linked by the same session ID.
+        session = {
+          id: sessionId,
+          participantCode: participantCode || "recovered-participant",
+          group: group || "recovered-group",
+          audioCondition: audioCondition || "recovered-audio",
+          createdAt: new Date().toISOString(),
+          endedAt: null,
+          score: null,
+        };
+
+        db.sessions.push(session);
+      }
 
       session.score = score;
       session.endedAt = new Date().toISOString();

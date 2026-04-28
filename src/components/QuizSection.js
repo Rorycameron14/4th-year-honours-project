@@ -237,7 +237,13 @@ function QuizSection() {
 
       if (index === QUESTIONS.length - 1) {
         // The session is only closed after the final answer so the stored score reflects the completed quiz.
-        await endSession(sessionId, newScore);
+        await endSession(
+          sessionId,
+          newScore,
+          participantCode,
+          group,
+          audioCondition
+        );
 
         localStorage.removeItem('sessionId');
         localStorage.removeItem('participantCode');

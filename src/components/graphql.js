@@ -127,10 +127,28 @@ export async function submitAnswer(sessionId, questionId, selectedIndex, isCorre
   return data.submitAnswer;
 }
 
-export async function endSession(sessionId, score) {
+export async function endSession(
+  sessionId,
+  score,
+  participantCode,
+  group,
+  audioCondition
+) {
   const query = `
-    mutation EndSession($sessionId: ID!, $score: Int!) {
-      endSession(sessionId: $sessionId, score: $score) {
+    mutation EndSession(
+      $sessionId: ID!,
+      $score: Int!,
+      $participantCode: String,
+      $group: String,
+      $audioCondition: String
+    ) {
+      endSession(
+        sessionId: $sessionId,
+        score: $score,
+        participantCode: $participantCode,
+        group: $group,
+        audioCondition: $audioCondition
+      ) {
         id
         score
         endedAt
@@ -141,6 +159,9 @@ export async function endSession(sessionId, score) {
   const data = await gqlRequest(query, {
     sessionId,
     score,
+    participantCode,
+    group,
+    audioCondition,
   });
 
   return data.endSession;
