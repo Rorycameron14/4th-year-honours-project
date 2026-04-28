@@ -24,72 +24,72 @@ const QUESTIONS = [
   {
     id: 'q2_pyramid_workers',
     question:
-      'What does the evidence presented in the lesson suggest about the workers who built the pyramids?',
+      'What does the lesson suggest about pyramid construction and the organisation of labour in Ancient Egypt?',
     options: [
-      'They were often organised labourers who worked in teams and received support such as food and shelter',
-      'They were foreign soldiers sent to Egypt by neighbouring kingdoms',
-      'They were mainly enslaved people forced to work without organisation',
-      'They were untrained villagers who worked only in emergency situations',
+      'The pyramids were probably built through organised teams of skilled workers who were supported with food, shelter, and state planning',
+      'The pyramids were mainly built by isolated families working independently without central organisation',
+      'The pyramids were simple structures that required little planning because the desert preserved them naturally',
+      'The pyramids were mostly constructed by foreign soldiers because Egyptian workers lacked building skills',
     ],
     correctIndex: 0,
   },
   {
     id: 'q3_nile_flooding',
     question:
-      'Which statement best explains why the yearly flooding of the Nile was important to farming?',
+      'Why did the yearly flooding of the Nile create both an opportunity and a risk for Ancient Egyptian farming?',
     options: [
-      'It stopped wild animals from approaching farmland',
-      'It made the desert permanently cooler and easier to live in',
-      'It deposited nutrient-rich soil that helped crops to grow',
-      'It allowed farmers to avoid using tools during harvest',
+      'The flood deposited nutrient-rich soil for crops, but flood levels that were too high or too low could damage fields or cause hunger',
+      'The flood permanently cooled the desert, but it also stopped boats from travelling along the river',
+      'The flood brought building stone to farmland, but it prevented farmers from growing wheat or barley',
+      'The flood removed the need for harvest planning, but it made temples less important to local communities',
     ],
-    correctIndex: 2,
+    correctIndex: 0,
   },
   {
     id: 'q4_great_pyramid_power',
     question:
-      'Why can the Great Pyramid be seen as evidence of both engineering skill and political power?',
+      'Why is the Great Pyramid useful evidence for understanding both engineering ability and political power in Ancient Egypt?',
     options: [
-      'It shows that Egyptian society depended entirely on foreign architects',
-      'It demonstrates the ability to organise resources, labour, and planning on a very large scale',
-      'It proves that religion had no influence on Egyptian building projects',
-      'It was built mainly for decoration and had little social importance',
+      'Its scale suggests advanced construction knowledge as well as the authority to organise labour, resources, and planning over a long period',
+      'Its desert location proves that Egyptian leaders avoided using the Nile for transport or organisation',
+      'Its survival proves that it was easy to build and therefore required little specialist knowledge',
+      'Its purpose as a tomb shows that pharaohs had religious importance but no political authority',
     ],
-    correctIndex: 1,
+    correctIndex: 0,
   },
   {
     id: 'q5_temples_society',
     question:
-      'What does the role of temples in Ancient Egypt suggest about Egyptian society?',
+      'What does the role of temples suggest about the relationship between religion, work, and local society in Ancient Egypt?',
     options: [
-      'Temples were mainly military buildings used to defend settlements',
-      'Priests had no organised duties beyond caring for statues',
-      'Religion and daily life were closely connected, and temples had both spiritual and local importance',
-      'Temples were used only for private prayer and had no wider function',
+      'Temples were spiritual centres where priests performed rituals, but they could also hold wealth, goods, and local social importance',
+      'Temples were mainly defensive buildings, and religious activity happened only inside private homes',
+      'Temples were decorative spaces with paintings and statues, but they had no connection to daily life or local power',
+      'Temples were used only by farmers during the Nile flood and had no role outside the harvest season',
     ],
-    correctIndex: 2,
+    correctIndex: 0,
   },
   {
     id: 'q6_papyrus',
     question:
-      'Which conclusion can be drawn from the use of papyrus in Ancient Egypt?',
+      'Which conclusion is best supported by the Ancient Egyptian use of papyrus?',
     options: [
-      'Writing was limited entirely to religious ceremonies',
-      'Egyptian society had no need for written communication',
-      'Papyrus was used mainly for building materials rather than communication',
-      'Record-keeping and administration were likely to have been important parts of daily life',
+      'Written communication and record-keeping were important enough that natural resources from the Nile were turned into writing materials',
+      'Papyrus shows that Ancient Egyptians had no need for stone inscriptions, wall paintings, or temple symbols',
+      'Papyrus was mainly used to build boats, which means writing was probably rare and unimportant',
+      'Papyrus proves that farming was separate from administration because plants were not used for practical tasks',
     ],
-    correctIndex: 3,
+    correctIndex: 0,
   },
   {
     id: 'q7_desert_location',
     question:
-      'Why was the desert location of the pyramids historically significant?',
+      'Why was the desert-edge location of the pyramids historically significant?',
     options: [
-      'The dry environment helped preserve structures for long periods of time',
-      'It reduced the need for workers during construction',
-      'It made them easier to hide from foreign enemies',
-      'It allowed builders to transport stone by boat more easily',
+      'The dry desert environment helped preserve stone structures, making them more likely to survive for thousands of years',
+      'The desert made construction easier because workers did not need food, shelter, or organised teams',
+      'The desert location meant pyramids were hidden from nearby communities and had little connection to pharaohs',
+      'The desert prevented temperature changes, so the structures avoided all natural damage over time',
     ],
     correctIndex: 0,
   },
@@ -237,13 +237,7 @@ function QuizSection() {
 
       if (index === QUESTIONS.length - 1) {
         // The session is only closed after the final answer so the stored score reflects the completed quiz.
-        await endSession(
-          sessionId,
-          newScore,
-          participantCode,
-          group,
-          audioCondition
-        );
+        await endSession(sessionId, newScore);
 
         localStorage.removeItem('sessionId');
         localStorage.removeItem('participantCode');

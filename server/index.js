@@ -152,7 +152,7 @@ const typeDefs = `#graphql
     updateSessionDetails(sessionId: ID!, participantCode: String!, group: String!, audioCondition: String!): Session!
     logHotspot(sessionId: ID!, sceneId: String!, hotspotId: String!): Event!
     submitAnswer(sessionId: ID!, questionId: String!, selectedIndex: Int!, isCorrect: Boolean!, responseTimeMs: Int!): Answer!
-    endSession(sessionId: ID!, score: Int!, participantCode: String, group: String, audioCondition: String): Session!
+    endSession(sessionId: ID!, score: Int!): Session!
   }
 `;
 
@@ -242,10 +242,7 @@ const resolvers = {
       return answer;
     },
 
-    endSession: async (
-      _,
-      { sessionId, score, participantCode, group, audioCondition }
-    ) => {
+    endSession: async (_, { sessionId, score }) => {
       const db = await readDB();
       let session = db.sessions.find((s) => s.id === sessionId);
 
@@ -254,9 +251,9 @@ const resolvers = {
         // so the already logged hotspot and quiz records remain linked by the same session ID.
         session = {
           id: sessionId,
-          participantCode: participantCode || "recovered-participant",
-          group: group || "recovered-group",
-          audioCondition: audioCondition || "recovered-audio",
+          participantCode: "recovered-participant",
+          group: "recovered-group",
+          audioCondition: "recovered-audio",
           createdAt: new Date().toISOString(),
           endedAt: null,
           score: null,
